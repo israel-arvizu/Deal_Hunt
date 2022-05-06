@@ -1,2 +1,2 @@
-# Deal_Hunt
-A website to showcase deals from many of your favorite retailers and more!
+# Music_Hunt
+A website to that showcases all of your favorite albums.

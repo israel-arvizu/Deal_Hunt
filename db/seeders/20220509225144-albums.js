@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
 
-      return queryInterface.bulkInsert('Album', [
+      return queryInterface.bulkInsert('Albums', [
         {
           name: "Call Me If You Get Lost",
           artist: "Tyler, the Creator",
@@ -50,7 +50,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
 
-      return queryInterface.bulkDelete('Album', null, {});
+      return queryInterface.bulkDelete('Albums', null, {});
 
   }
 };

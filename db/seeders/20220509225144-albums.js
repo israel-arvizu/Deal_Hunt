@@ -2,25 +2,55 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      return queryInterface.bulkInsert('People', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+      return queryInterface.bulkInsert('Album', [
+        {
+          name: "Call Me If You Get Lost",
+          artist: "Tyler, the Creator",
+          releaseDate: new Date('2021-06-25'),
+          songList: "SIR BAUDELAIRE%CORSO%LEMONDHEAD%WUSYANAME%LUMBERJACK%HOT WIND BLOWS%MASSA%RUNITUP",
+          likeCount: 34,
+          rating: 4.7
+        },
+        {
+          name: "Planet Her",
+          artist: "Doja Cat",
+          releaseDate: new Date('2021-06-25'),
+          songList: "Women%Naked%Payday%Get Into It%Need to Know%I Dont Do Drugs%Love to Dream%You Right%Been Like This",
+          likeCount: 27,
+          rating: 3.9
+        },
+        {
+          name: "Donda",
+          artist: "Kanye West",
+          releaseDate: new Date('2021-09-29'),
+          songList: "Donda Chant(Ft.Styleena Johnson)%Jail (Ft.JAY-Z)%God Breathed (Ft. Vory)%Off The Grid%Hurricane (Ft. Lil Baby)",
+          likeCount: 43,
+          rating: 3.6
+        },
+        {
+          name: "Happier Than Ever",
+          artist: "Billie Eillish",
+          releaseDate: new Date('2021-07-30'),
+          songList: "Getting Older%I Didnt Change My Number%Billie Bossa Nova%My Future%Oxytocin%GoldWing%Lost Cause",
+          likeCount: 35,
+          rating: 4.8
+        },
+        {
+          name: "Sour",
+          artist: "Olivia Rodrigo",
+          releaseDate: new Date('2021-04-21'),
+          songList: "Brutal%Traitor%Driver License%Deja Vu%Good 4 U%happier%Favorite Crime",
+          likeCount: 17,
+          rating: 4.2
+        }
+      ], {});
+
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+      return queryInterface.bulkDelete('Album', null, {});
+
   }
 };

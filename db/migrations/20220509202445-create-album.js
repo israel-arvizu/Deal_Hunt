@@ -16,11 +16,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(100)
       },
-      artistId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        unique: true
-      },
       releaseDate: {
         allowNull: false,
         type: Sequelize.DATE

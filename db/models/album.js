@@ -9,11 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.STRING(100),
      allowNull: false,
     },
-    artistId: {
-     type: DataTypes.INTEGER,
-     allowNull: false,
-     unique: true,
-    },
     releaseDate: {
      type: DataTypes.DATE,
      allowNull: false,
@@ -31,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Album.associate = function(models) {
     // associations can be defined here
+    Album.belongsToMany(models.User, {
+      through: 'FavoriteList',
+      foreignKey: 'albumId',
+      otherKey: 'userId'
+    })
+    Album.hasMany(models.Review, { foreignKey: 'albumId' })
   };
   return Album;
 };

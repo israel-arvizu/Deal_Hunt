@@ -9,25 +9,31 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       artist: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(100)
       },
       artistId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        unique: true
       },
       releaseDate: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       songList: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(255)
       },
       likeCount: {
         type: Sequelize.INTEGER
       },
       rating: {
-        type: Sequelize.NUMERIC
+        type: Sequelize.NUMERIC(2, 1)
       },
       createdAt: {
         allowNull: false,

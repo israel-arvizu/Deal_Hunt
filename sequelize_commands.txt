@@ -1,0 +1,9 @@
+npx sequelize model:generate --name User --attributes id:integer,firstName:string,lastName:string,email:string,hashedPassword:string,favoriteListId:integer
+
+npx sequelize model:generate --name Album --attributes id:integer,name:string,artist:string,artistId:integer,releaseDate:date,songList:string,likeCount:integer,rating:numeric
+
+npx sequelize model:generate --name FavoriteList --attributes id:integer,albumId:integer,userId:integer
+
+npx sequelize model:generate --name Review --attributes id:integer,albumId:integer,userId:integer,content:string
+
+npx sequelize model:generate --name Comment --attributes id:integer,userId:integer,reviewId:integer,content:string

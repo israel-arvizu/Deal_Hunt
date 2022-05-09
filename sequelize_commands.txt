@@ -7,3 +7,6 @@ npx sequelize model:generate --name FavoriteList --attributes id:integer,albumId
 npx sequelize model:generate --name Review --attributes id:integer,albumId:integer,userId:integer,content:string
 
 npx sequelize model:generate --name Comment --attributes id:integer,userId:integer,reviewId:integer,content:string
+
+
+ npx dotenv db:migrate

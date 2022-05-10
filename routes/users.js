@@ -162,7 +162,7 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     })
 }))
 
-router.post('/signout', (req, res) => {
+router.get('/signout', (req, res) => {
   signoutUser(req, res);
   res.redirect('/');
 })

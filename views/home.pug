@@ -3,6 +3,9 @@ extends layout.pug
 block content
   div
     h1 Home Page
-    button(href='/signin' type='button') Sign In
-    button(href='/signup' type='button') Sign Up
-    
+    a(href='/users/signin')
+      input(type='button' class='signin btn' value='Sign In')
+    a(href='/users/signup')
+      input(type='button' class='signup btn' value='Sign Up')
+    a(href='/users/signout')
+      input(type='button' class='signout btn' value='Sign Out')

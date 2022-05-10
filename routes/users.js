@@ -171,10 +171,9 @@ router.get('/signout', (req, res) => {
 router.get('/:id', asyncHandler(async(req, res)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
-  console.log(requestedUser);
-  console.log(userId)
+  // console.log(requestedUser);
+  // console.log(userId)
   if(userId === parseInt(requestedUser)){
-    console.log('Entered HEre')
     const favoriteList = await db.FavoriteList.findAll({
       where: {userId}
     })

@@ -9,7 +9,7 @@ const signoutUser = (req, res) => {
 
 const requireAuth = (req, res, next) => {
     if (!res.locals.authenticated) {
-        return res.redirect('/user/signin')
+        return res.redirect('/users/signin')
     }
     return next();
 }

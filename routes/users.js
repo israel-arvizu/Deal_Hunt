@@ -168,11 +168,13 @@ router.get('/signout', (req, res) => {
 })
 
 
-router.get('/:id', requireAuth, asyncHandler(async(req, res)=>{
-  const userId = req.params.id;
-  const { authenticatedId } = req.session.auth;
-  if(userId === authenticatedId){
-
+router.get('/:id', asyncHandler(async(req, res)=>{
+  const requestedUser = req.params.id;
+  const { userId } = req.session.auth;
+  console.log(requestedUser);
+  console.log(userId)
+  if(userId === parseInt(requestedUser)){
+    console.log('Entered HEre')
     const favoriteList = await db.FavoriteList.findAll({
       where: {userId}
     })
@@ -180,7 +182,7 @@ router.get('/:id', requireAuth, asyncHandler(async(req, res)=>{
 
     res.render('profile-page', favoriteList)
   }
-
+  res.send('Not Authethicated')
 
 }))
 

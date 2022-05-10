@@ -168,4 +168,20 @@ router.get('/signout', (req, res) => {
 })
 
 
+router.get('/:id', requireAuth, asyncHandler(async(req, res)=>{
+  const userId = req.params.id;
+  const { authenticatedId } = req.session.auth;
+  if(userId === authenticatedId){
+
+    const favoriteList = await db.FavoriteList.findAll({
+      where: {userId}
+    })
+    console.log(favoriteList);
+
+    res.render('profile-page', favoriteList)
+  }
+
+
+}))
+
 module.exports = router;

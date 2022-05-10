@@ -2,7 +2,8 @@ var express = require('express');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { check, validationResult} = require('express-validator');
 const db = require('../db/models');
-const bcrypt = require('./bcrypt')
+const { checkPassword, generatePass} = require('./bcrypt')
+const bcrypt = require('bcryptjs')
 
 var router = express.Router();
 
@@ -73,14 +74,14 @@ const signUpValidator = [
 
 
 router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, res, next) =>{
-    // console.log('-----------' , 'entered Post')
+
     const {
         firstName,
         lastName,
         email,
         hashedPassword
     } = req.body
-    const hashPass = await bcrypt.generatePass(hashedPassword)
+    const hashPass = await generatePass(hashedPassword)
     // console.log(hashPass)
 
     const user = db.User.build({
@@ -105,6 +106,65 @@ router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, 
         })
     }
 }));
+
+router.get('/signin', csrfProtection, asyncHandler (async(req, res, next) => {
+    res.render('signin', {
+        title:'Sign In',
+        errors: [],
+        csrfToken: req.csrfToken()
+    })
+
+}));
+const signInValidators = [
+ check('email')
+  .exists({ checkFalsy: true })
+  .withMessage('Please provide a value for Email Address'),
+ check('hashedPassword')
+  .exists({ checkFalsy: true })
+  .withMessage('Please provide a value for Password'),
+];
+router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req,res, next) => {
+    const {
+        email,
+        hashedPassword
+    } = req.body
+    let errors = []
+    const validatorErrors = validationResult(req)
+
+    if(validatorErrors.isEmpty()){
+
+
+      const user = await db.User.findOne({
+          where: { email }
+      })
+
+      if (user) {
+          const userPass = user.hashedPassword
+
+
+      const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
+          if (checkedVar) {
+            //loggedin User
+
+            // req.session.auth = {
+            //     name: user.firstName,
+            //     userId: user.id
+            // }
+             res.redirect('/')
+          }
+        errors.push("Failed Login")
+      }
+    } else {
+          errors = validatorErrors.array().map((error) => error.msg);
+    }
+    res.render('signin', {
+        title:"Sign In",
+        email,
+        errors,
+        csrfToken: req.csrfToken()
+    })
+}))
+
 
 
 module.exports = router;

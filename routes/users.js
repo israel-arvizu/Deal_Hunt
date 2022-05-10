@@ -4,6 +4,7 @@ const { check, validationResult} = require('express-validator');
 const db = require('../db/models');
 const { checkPassword, generatePass} = require('./bcrypt')
 const bcrypt = require('bcryptjs')
+const { signinUser, signoutUser, requireAuth, restoreUser} = require('../auth')
 
 var router = express.Router();
 
@@ -95,6 +96,7 @@ router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, 
 
     if(validatorErrors.isEmpty()){
         await user.save();
+        signinUser(req, res, user);
         res.redirect('/');
     }else {
         const errors = validatorErrors.array().map((error) => error.msg);
@@ -144,13 +146,8 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
 
       const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
           if (checkedVar) {
-            //loggedin User
-
-            // req.session.auth = {
-            //     name: user.firstName,
-            //     userId: user.id
-            // }
-             res.redirect('/')
+            signinUser(req, res, user);
+            res.redirect('/')
           }
         errors.push("Failed Login")
       }
@@ -165,6 +162,10 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     })
 }))
 
+router.post('/signout', (req, res) => {
+  signoutUser(req, res);
+  res.redirect('/');
+})
 
 
 module.exports = router;

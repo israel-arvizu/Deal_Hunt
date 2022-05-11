@@ -31,7 +31,7 @@ block content
                             td= album.songList
                             td= album.rating
                             td
-                              button(type='button') Add
+                              button(type='button' class='fave btn' id=`${album.id}` onclick='reply_click("'+this.id+'")') Add
     div(class="side-list")
       div
         h3 Editors Choice

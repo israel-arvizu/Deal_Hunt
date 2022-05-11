@@ -3,7 +3,7 @@ html
   head
       block head
         title= title
-        link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
   body
     div(class="nav-bar")
         div(class="logo")
@@ -20,7 +20,7 @@ html
             div
                 label(for='profile_menu') User's Name
                     select(name= 'profile_menu' id= 'profile_menu')
-                        a(href='/users/:id')
+                        a(href='/users/#{userId}')
                             option(type='button' class='dropdown btn') Profile
                         a(href='/users/settings')
                             option(type='button' class='dropdown btn') Settings
@@ -29,6 +29,16 @@ html
                         a(href='/users/signout')
                             option(type='button' class='dropdown btn') Log Out
             img(src='public/favicon.ico')
+
+            div(class='dropdown')
+                button(class='dropbtn') User's Name
+                div(class='dropdown-content')
+                    a(href='/users/:id') Profile
+                    a(href='/users/settings') Settings
+                    a(href='/users/:id/favoriteList') Favorite List
+                    a(href='/users/signout') Sign Out
+
+
 
 
     block content

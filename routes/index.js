@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { csrfProtection, asyncHandler } = require('./utils');
+const { csrfProtection, asyncHandler, clickId } = require('./utils');
 const db = require('../db/models');
 
 /* GET home page. */
@@ -9,6 +9,7 @@ router.get('/', asyncHandler(async(req, res, next)=> {
     order: [['rating', 'DESC']],
     limit: 10
   })
+
   res.render('home', {title: 'Home', albums});
 }));
 

@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+    h2 Guest View
+    div(class="profile-bar")
+    div(class="profile-body")
+        body
+            table
+                thead
+                    tr
+                        th Album
+                        th Artist
+                tbody
+                    each album in favListQuery
+                        tr
+                            td= album.name
+                            td= album.artist

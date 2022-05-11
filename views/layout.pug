@@ -17,23 +17,23 @@ html
         div(class=right-sector)
             a(href='/users/signout')
                 input(type="button" class="signout btn" value="Sign Out")
-            div
-                label(for='profile_menu') User's Name
-                    select(name= 'profile_menu' id= 'profile_menu')
-                        a(href='/users/#{userId}')
-                            option(type='button' class='dropdown btn') Profile
-                        a(href='/users/settings')
-                            option(type='button' class='dropdown btn') Settings
-                        a(href='/users/:id/favoriteList')
-                            option(type='button' class='dropdown btn') My Albums
-                        a(href='/users/signout')
-                            option(type='button' class='dropdown btn') Log Out
+            //- div
+            //-     label(for='profile_menu') User's Name
+            //-         select(name= 'profile_menu' id= 'profile_menu')
+            //-             a(href='/users/#{userId}')
+            //-                 option(type='button' class='dropdown btn') Profile
+            //-             a(href='/users/settings')
+            //-                 option(type='button' class='dropdown btn') Settings
+            //-             a(href='/users/:id/favoriteList')
+            //-                 option(type='button' class='dropdown btn') My Albums
+            //-             a(href='/users/signout')
+            //-                 option(type='button' class='dropdown btn') Log Out
             img(src='public/favicon.ico')
 
             div(class='dropdown')
                 button(class='dropbtn') User's Name
                 div(class='dropdown-content')
-                    a(href='/users/:id') Profile
+                    a(href='/users/#{userId}') Profile
                     a(href='/users/settings') Settings
                     a(href='/users/:id/favoriteList') Favorite List
                     a(href='/users/signout') Sign Out

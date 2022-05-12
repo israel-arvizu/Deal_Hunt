@@ -1,4 +1,4 @@
-extends layout.pug
+extends guest-layout.pug
 
 block content
     h2 All Albums
@@ -19,6 +19,6 @@ block content
                             td= album.artist
                             td= album.releaseDate
                             td= album.songList
-
                             td
-                              button(type='button') Add
+                                a(href='/users/signin')
+                                    button(type='button') Add

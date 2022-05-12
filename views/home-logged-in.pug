@@ -2,13 +2,7 @@ extends layout.pug
 
 block content
   div
-    h1 Home Page
-    a(href='/users/signin')
-      input(type='button' class='signin btn' value='Sign In')
-    a(href='/users/signup')
-      input(type='button' class='signup btn' value='Sign Up')
-    a(href='/users/signout')
-      input(type='button' class='signout btn' value='Sign Out')
+    h1 Welcome #{userId}
   div
     h1 Top 10 Charted Albums of the Month
     div(class="top-ten")
@@ -31,7 +25,7 @@ block content
                             td= album.songList
                             td= album.rating
                             td
-                              button(type='button') Add
+                              button(type='button' class='fave btn' id=`${album.id}`) Add
     div(class="side-list")
       div
         h3 Editors Choice

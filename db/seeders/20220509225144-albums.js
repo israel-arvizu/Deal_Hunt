@@ -55,6 +55,16 @@ module.exports = {
           rating: 4.2,
           createdAt: '2020-08-11',
           updatedAt: '2020-08-11'
+        },
+        {
+          name: "Sour",
+          artist: "Olivia Rodrigo",
+          releaseDate: new Date('2021-04-21'),
+          songList: "Brutal%Traitor%Driver License%Deja Vu%Good 4 U%happier%Favorite Crime",
+          likeCount: 17,
+          rating: 4.2,
+          createdAt: '2020-08-11',
+          updatedAt: '2020-08-11'
         }
       ], {});
 

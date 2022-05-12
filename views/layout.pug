@@ -33,7 +33,7 @@ html
             div(class='dropdown')
                 button(class='dropbtn') User's Name
                 div(class='dropdown-content')
-                    a(href='/users/#{userId}') Profile
+                    a(href=`/users/${userId}`) Profile
                     a(href='/users/settings') Settings
                     a(href='/users/:id/favoriteList') Favorite List
                     a(href='/users/signout') Sign Out

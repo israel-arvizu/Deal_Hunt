@@ -5,12 +5,13 @@ const db = require('../db/models');
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next)=> {
+  const { userId } = req.session.auth; // ALLOWS THE BUTTON 'PROFILE' TO WORK AND TAKE YOU TO THAT USER'S PROFILE PAGE
   const albums = await db.Album.findAll({
     order: [['rating', 'DESC']],
     limit: 10
   })
 
-  res.render('home', {title: 'Home', albums});
+  res.render('home', {title: 'Home', albums, userId});
 }));
 
 

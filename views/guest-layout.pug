@@ -4,6 +4,7 @@ html
     block head
         title= title
         link(rel='stylesheet' href='/stylesheets/index.css')
+        script(src='/javascripts/index.js' type='module')
     body
         div(class='guest-navbar')
             h1 Welcome to Music Hunt!
@@ -19,4 +20,5 @@ html
                     input(type='button' class='signin btn' value='Sign In')
                 a(href='/users/signup')
                     input(type='button' class='signup btn' value='Sign Up')
+                button(type='button' class='btn' id='demo') Demo Log In
     block content

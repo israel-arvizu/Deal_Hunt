@@ -30,6 +30,9 @@ module.exports = {
       rating: {
         type: Sequelize.NUMERIC(2, 1)
       },
+      url: {
+        type: Sequelize.STRING(255)
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

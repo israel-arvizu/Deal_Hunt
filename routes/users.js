@@ -256,4 +256,17 @@ router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
     })
   }
 }))
+
+router.post(
+  "/demo",
+  asyncHandler(async (req, res) => {
+    const user = await db.User.findByPk(7);
+    console.log(user)
+    signinUser(req, res, user);
+    console.log(req.session.auth)
+    res.redirect('/')
+  })
+);
+
+
 module.exports = router;

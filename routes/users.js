@@ -207,4 +207,28 @@ router.get('/:id', asyncHandler(async(req, res, next)=>{
   next();
 }))
 
+router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
+  const albumId = await db.Album.findByPk(req.params.id);
+  const {userId} = req.session.auth;
+
+  if(userId) {
+    const addedAlbum = await db.FavoriteList.build({
+        userId,
+        albumId: +req.params.id
+    })
+
+    console.log(addedAlbum);
+    await addedAlbum.save();
+
+    res.json({
+      message: 'Added'
+    })
+  }else {
+    res.json({
+      message: 'Failed'
+    })
+    window.location.href = "/users/signin";
+  }
+}))
+
 module.exports = router;

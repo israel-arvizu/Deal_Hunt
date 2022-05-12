@@ -22,15 +22,24 @@ router.get('/', asyncHandler(async(req, res, next)=> {
 
 
 router.get('/albums', asyncHandler(async (req, res) =>{
+
   const albums = await db.Album.findAll();
-  if(req.session.auth)
-    res.render('albums', {title: 'Albums', albums})
+
+  if(req.session.auth){
+    const { userId } = req.session.auth
+    res.render('albums', {title: 'Albums', albums, userId})
+  }
 
   res.render('albums-guest', {title: 'Albums', albums})
 }));
 
 router.get('/about', (req, res) => {
-  res.render('about', {Title: 'About'})
+  if(req.session.auth){
+    const { userId } = req.session.auth
+    res.render('about', {Title: 'About', userId})
+  }
+
+  res.render('guest-about', {Title: 'About'})
 });
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
@@ -47,8 +56,8 @@ router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
     csrfToken: req.csrfToken(),
     errors: [],
     user,
-    title: "Settings"
-
+    title: "Settings",
+    userId
   })
 }) )
 
@@ -105,7 +114,8 @@ router.post('/settings', csrfProtection, updateValidator, asyncHandler(async(req
       title: "Settings",
       user,
       errors,
-      csrfToken: req.csrfToken()
+      csrfToken: req.csrfToken(),
+      userId
   })
 
 }

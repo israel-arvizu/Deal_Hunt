@@ -6,6 +6,7 @@ const { checkPassword, generatePass} = require('./bcrypt')
 const bcrypt = require('bcryptjs')
 const { signinUser, signoutUser, requireAuth, restoreUser} = require('../auth');
 const { sequelize } = require('../db/models');
+const { Op } = require("sequelize");
 
 var router = express.Router();
 
@@ -118,6 +119,7 @@ router.get('/signin', csrfProtection, asyncHandler (async(req, res, next) => {
     })
 
 }));
+
 const signInValidators = [
  check('email')
   .exists({ checkFalsy: true })
@@ -126,6 +128,7 @@ const signInValidators = [
   .exists({ checkFalsy: true })
   .withMessage('Please provide a value for Password'),
 ];
+
 router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req,res, next) => {
     const {
         email,
@@ -168,31 +171,28 @@ router.get('/signout', (req, res) => {
   res.redirect('/');
 })
 
+router.get('/:id(\\d+)/favoritelist', asyncHandler(async(req, res) => {
+  const requestedUser = req.params.id;
+  const { userId } = req.session.auth;
+  const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
+  let songArray = [];
+  const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
+  res.render('favorite-list', {favListQuery, songArray, userId});
+}))
 
-router.get('/:id', asyncHandler(async(req, res, next)=>{
+router.get('/:id(\\d+)', asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
   const [favListQuery, metadata] = await sequelize.query(`SELECT name, artist FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
   // console.log(requestedUser);
   // console.log(userId)
   if(userId === parseInt(requestedUser)){
-    // console.log('ENTERED IF STAT')
-
-    // const albumList = await db.FavoriteList.findAll({
-    //   include: [db.User, db.Album],
-    //   where: {
-    //     id: userId
-    //   },
-    // })
-
-    // console.log("RESULTS: ", albumList)
-    // console.log("DB ALBUMS: ", albumList);
-
     const user = await db.User.findByPk(userId);
 
     res.render('profile-page', {
       title: `${user.firstName}'s Page`,
-      favListQuery
+      favListQuery,
+      userId
     })
 
   } else {
@@ -200,7 +200,8 @@ router.get('/:id', asyncHandler(async(req, res, next)=>{
     const originUser = await db.User.findByPk(requestedUser);
     res.render('guest-page', {
       title: `${originUser.firstName}'s Page`,
-      favListQuery
+      favListQuery,
+      userId
     })
   }
   // res.send('Not Authethicated')
@@ -231,4 +232,28 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
   }
 }))
 
+router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
+  console.log('Entered Route')
+  const {userId} = req.session.auth;
+  const albumId = req.params.id;
+  const list = await db.FavoriteList.findOne({where: {
+    [Op.and]: [
+      {userId: userId},
+      {albumId: albumId}
+    ]
+  }});
+
+  if(userId){
+    list.destroy();
+    console.log('Destroyed Album')
+    res.json({
+      message: 'Destroyed'
+    })
+
+  }else{
+    res.json({
+      message: 'Failed'
+    })
+  }
+}))
 module.exports = router;

@@ -1,27 +1,26 @@
-const db = require('../../db/models')
-const { clickId } = require('./utils');
-
 window.addEventListener("DOMContentLoaded", () => {
 
-const faveButton = document.querySelector('.fave')
+// const faveButton = document.querySelector('.fave')
+const faveButtonArray = document.querySelectorAll('.fave')
+
+faveButtonArray.forEach(button => {
+    button.addEventListener('click', (e) => {
+        console.log(e.target.id);
+        e.preventDefault();
 
 
-faveButton.addEventListener('click', (e) => {
-    e.preventDefault();
+        const { userId } = req.session.auth;
+        console.log(userId);
+        if(userId) {
+            db.FavoriteList.build({
+                userId,
+                albumId: id
+            })
+        } else {
+            window.location.href = "/users/signin";
+        }
 
-
-
-    const { userId } = req.session.auth;
-
-    if(userId) {
-        db.FavoriteList.build({
-            userId,
-            albumId
-        })
-    } else {
-        window.location.href = "/users/signin";
-    }
-
+    })
 })
 
 })

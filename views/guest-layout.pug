@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+    block head
+        title= title
+        link(rel='stylesheet' href='/stylesheets/index.css')
+    body
+        div(class='guest-navbar')
+            h1 Welcome to Music Hunt!
+            div(class="nav-bar")
+                div(class="logo")
+                div(class="search-bar")
+                div(class="nav-buttons")
+                    a(href='/') Home
+                    a(href='/albums') Albums
+                    a(href='/about') About
+            div
+                a(href='/users/signin')
+                    input(type='button' class='signin btn' value='Sign In')
+                a(href='/users/signup')
+                    input(type='button' class='signup btn' value='Sign Up')
+    block content

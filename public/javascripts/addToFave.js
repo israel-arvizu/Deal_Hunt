@@ -24,4 +24,25 @@ faveButtonArray.forEach(button => {
     })
 })
 
+const removeFaveArray = document.querySelectorAll('.removeFave')
+
+removeFaveArray.forEach(button => {
+    button.addEventListener('click', async(e) => {
+        const albumId = e.target.id;
+
+        const res = await fetch(`/users/favorite-list/remove/${albumId}`,{
+            method: 'PUT'
+        })
+
+        const data = await res.json();
+
+        if(data.message === 'Destroyed'){
+            const container = document.getElementById(`container-${albumId}`);
+            container.remove();
+        }else{
+            alert('Failed');
+        }
+        alert('Removed Successfully');
+    })
+})
 })

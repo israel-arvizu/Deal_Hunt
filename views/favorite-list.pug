@@ -1,0 +1,27 @@
+extends layout.pug
+
+block content
+    h2 Your Favorite List
+    div(class="profile-body")
+        body
+            table
+                thead
+                    tr
+                        th Album Name
+                        th Artist
+                        th Realease Date
+                        //- th Song List
+                        th Remove Album
+
+                tbody
+                        each album in favListQuery
+                                tr(id=`container-${album.albumId}`)
+                                    td= album.name
+                                    td= album.artist
+                                    td= album.releaseDate
+                                    //- td
+                                    //-     song[i]+
+                                    //-     ol
+                                    //-             li= song
+                                    td
+                                        button(type='button' class='removeFave btn' id=`${album.albumId}`) Remove

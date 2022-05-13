@@ -229,6 +229,7 @@ router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(as
 router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
   // const value = document.querySelector('#query').value
   const {SearchName} = req.body
+  const {userId} = req.session.auth;
   // console.log(SearchName)
   let searchArray = SearchName.split(' ')
   let searchFilters = []
@@ -254,7 +255,8 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
       title: 'search-results',
       errors: [],
       csrfToken: req.csrfToken(),
-      searchFilters
+      searchFilters,
+      userId
     })
   } else {
     res.render('guest-search-results', {

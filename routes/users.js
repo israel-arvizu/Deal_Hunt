@@ -122,8 +122,12 @@ router.get('/signin', csrfProtection, asyncHandler (async(req, res, next) => {
 
 const signInValidators = [
  check('email')
-  .exists({ checkFalsy: true })
-  .withMessage('Please provide a value for Email Address'),
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address')
+    .isLength({ max: 255 })
+    .withMessage('Email Address must not be more than 255 characters long')
+    .isEmail()
+    .withMessage('Email Address is not a valid email'),
  check('hashedPassword')
   .exists({ checkFalsy: true })
   .withMessage('Please provide a value for Password'),
@@ -138,26 +142,23 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     const validatorErrors = validationResult(req)
 
     if(validatorErrors.isEmpty()){
-
-
       const user = await db.User.findOne({
           where: { email }
       })
 
       if (user) {
-          const userPass = user.hashedPassword
-
-
-      const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
-          if (checkedVar) {
-            signinUser(req, res, user);
-            res.redirect('/')
-          }
+        const userPass = user.hashedPassword
+        const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
+        if (checkedVar) {
+          signinUser(req, res, user);
+          res.redirect('/')
+        }
         errors.push("Failed Login")
-      }
-    } else {
-          errors = validatorErrors.array().map((error) => error.msg);
-    }
+      }else
+      errors.push("Failed Login")
+    }else
+      errors = validatorErrors.array().map((error) => error.msg);
+
     res.render('signin', {
         title:"Sign In",
         email,
@@ -166,46 +167,53 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     })
 }))
 
-router.get('/signout', (req, res) => {
+router.get('/signout', csrfProtection, asyncHandler(async(req, res) => {
   signoutUser(req, res);
   res.redirect('/');
-})
+}))
 
-router.get('/:id(\\d+)/favoritelist', asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)/favoritelist',csrfProtection,  asyncHandler(async(req, res) => {
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
   const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
   let songArray = [];
   const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
-  res.render('favorite-list', {favListQuery, songArray, userId});
+  res.render('favorite-list', {
+    favListQuery,
+    songArray,
+    userId,
+    csrfToken: req.csrfToken()
+  });
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res, next)=>{
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
+  const currUser = await db.User.findByPk(userId);
   const [favListQuery, metadata] = await sequelize.query(`SELECT name, artist FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
-  // console.log(requestedUser);
-  // console.log(userId)
+
+
   if(userId === parseInt(requestedUser)){
     const user = await db.User.findByPk(userId);
 
     res.render('profile-page', {
       title: `${user.firstName}'s Page`,
       favListQuery,
-      userId
+      userId,
+      currUser,
+      csrfToken: req.csrfToken()
     })
 
-  } else {
-
+  }else {
     const originUser = await db.User.findByPk(requestedUser);
     res.render('guest-page', {
       title: `${originUser.firstName}'s Page`,
       favListQuery,
-      userId
+      userId,
+      csrfToken: req.csrfToken()
     })
   }
-  // res.send('Not Authethicated')
-  next();
+
 }))
 
 router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {

@@ -16,15 +16,17 @@ block content
                             th Add to Favorite
                     tbody
                         each album in albums
-                            tr
+                            tr(class=`albumRow-${album.id}`)
+                                td
+                                    a(href=`/albums/${album.id}` class='home-album-link')
+                                        img(src= album.url)
                                 td= album.name
                                 td= album.artist
                                 td= album.releaseDate
                                 td= album.songList
                                 td= album.rating
                                 td
-                                    a(href='/users/signin')
-                                        button(type='button' class='fave btn' id=`${album.id}`) Add
+                                    button(type='button' class='fave btn' id=`${album.id}`) Add
         div(class="side-list")
             div
             h3 Editors Choice

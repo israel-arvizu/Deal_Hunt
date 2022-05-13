@@ -11,6 +11,10 @@ html
             div(class="nav-bar")
                 div(class="logo")
                 div(class="search-bar")
+            form(id="searchbar" action='/search/results' method="post")
+                input(type="search" id="query" name="SearchName" placeholder="Albums")
+                input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                button Search
                 div(class="nav-buttons")
                     a(href='/') Home
                     a(href='/albums') Albums

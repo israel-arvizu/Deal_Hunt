@@ -13,12 +13,15 @@ block content
                         th Song List
                         th Add To Favorites
                 tbody
-                    each album in albums
-                        tr
-                            td= album.name
-                            td= album.artist
-                            td= album.releaseDate
-                            td= album.songList
-
-                            td
-                              button(type='button') Add
+                     each album in albums
+                      tr(class=`albumRow-${album.id}`)
+                          td
+                            a(href=`/albums/${album.id}` class='home-album-link')
+                              img(src= album.url)
+                          td= album.name
+                          td= album.artist
+                          td= album.releaseDate
+                          td= album.songList
+                          td= album.rating
+                          td
+                            button(type='button' class='fave btn' id=`${album.id}`) Add

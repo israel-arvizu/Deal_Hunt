@@ -276,39 +276,21 @@ router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
 router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
   // const value = document.querySelector('#query').value
   const {SearchName} = req.body
-  if(req.session.auth){
-    const {userId} = req.session.auth;
-  }
-  // console.log(SearchName)
+
   let searchArray = SearchName.split(' ')
   let searchFilters = []
   const albumResults = await db.Album.findAll()
     albumResults.map(album => {
-    searchArray.map(filtered => {
-   if (album.name.toLowerCase().includes(filtered.toLowerCase())) {
-     searchFilters.push(album)
-   }
+      searchArray.map(filtered => {
+        if (album.name.toLowerCase().includes(filtered.toLowerCase())) {
+        searchFilters.push(album)
+      }
 
+      })
     })
 
-
-router.put('/reviews/edit/:id(\\d+)', asyncHandler(async(req, res) => {
-  const reviewId = req.params.id
-  const review = await db.Review.findByPk(reviewId)
-
-
-  review.content = req.body.content
-  await review.save()
-  // res.redirect(`/reviews/edit/${review.albumId}`)
-  res.json({
-    message: 'Success',
-    review
-  })
-
-  })
-
-  if (req.session.auth) {
-
+  if(req.session.auth) {
+    const {userId} = req.session.auth;
     res.render('search-results', {
       title: 'search-results',
       errors: [],
@@ -325,5 +307,20 @@ router.put('/reviews/edit/:id(\\d+)', asyncHandler(async(req, res) => {
     })
   }
 }))
+
+router.put('/reviews/edit/:id(\\d+)', asyncHandler(async(req, res) => {
+  const reviewId = req.params.id
+  const review = await db.Review.findByPk(reviewId)
+
+
+  review.content = req.body.content
+  await review.save()
+  // res.redirect(`/reviews/edit/${review.albumId}`)
+  res.json({
+    message: 'Success',
+    review
+  })
+
+  }))
 
 module.exports = router;

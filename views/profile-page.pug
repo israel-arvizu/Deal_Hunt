@@ -16,6 +16,7 @@ block content
             table
                 thead
                     tr
+                        th
                         th Album Name
                         th Artist
                         th Realease Date
@@ -25,6 +26,9 @@ block content
                 tbody
                         each album in favListQuery
                                 tr(id=`container-${album.albumId}`)
+                                    td
+                                        a(href=`/albums/${album.id}` class='home-album-link')
+                                            img(src= album.url)
                                     td= album.name
                                     td= album.artist
                                     td= album.releaseDate

@@ -11,7 +11,6 @@ block content
                             th Album
                             th Artist
                             th Release Date
-                            th Song List
                             th Rating
                             th Add to Favorite
                     tbody
@@ -23,7 +22,6 @@ block content
                                 td= album.name
                                 td= album.artist
                                 td= album.releaseDate
-                                td= album.songList
                                 td= album.rating
                                 td
                                     button(type='button' class='fave btn' id=`${album.id}`) Add

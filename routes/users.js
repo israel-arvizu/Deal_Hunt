@@ -190,7 +190,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
   const currUser = await db.User.findByPk(userId);
-  const [favListQuery, metadata] = await sequelize.query(`SELECT name, artist FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
+  const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
 
 
   if(userId === parseInt(requestedUser)){

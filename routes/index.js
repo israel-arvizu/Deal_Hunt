@@ -3,6 +3,8 @@ var router = express.Router();
 const { csrfProtection, asyncHandler, clickId } = require('./utils');
 const { check, validationResult} = require('express-validator');
 const db = require('../db/models');
+const { sequelize } = require('../db/models');
+const { Op } = require("sequelize");
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next)=> {
@@ -12,10 +14,13 @@ router.get('/', asyncHandler(async(req, res, next)=> {
     limit: 10
     })
 
-  if(req.session.auth){
+  if(req.session.auth) {
     const { userId } = req.session.auth; // ALLOWS THE BUTTON 'PROFILE' TO WORK AND TAKE YOU TO THAT USER'S PROFILE PAGE
-
-    res.render('home-logged-in', {title: 'Home', albums, userId});
+    const loggedInUser = await db.User.findByPk(userId)
+    const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${userId})`)
+    let songArray = [];
+    const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
+    res.render('home-logged-in', {title: 'Home', albums, userId ,loggedInUser, songs, favListQuery});
   }else
     res.render('home-guest', {title: 'Home', albums});
 }));
@@ -119,5 +124,31 @@ router.post('/settings', csrfProtection, updateValidator, asyncHandler(async(req
   })
 
 }
+}))
+
+
+router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(async(req, res) => {
+  res.send("WWWWWWWWWWW")
+  const albumId = req.params.id;
+  const album = db.Album.findByPk(albumId)
+  const reviews = db.Review.findAll({
+    where: {
+      albumId
+
+    },
+    order: [['createdAt', 'DESC']]
+
+  })
+
+//   if (req.session.auth) {
+//     const { userId } = req.session.auth;
+
+//     res.render('album-page', album, userId, reviews)
+// } else {
+//     res.render('guest-album-page', album, userId, reviews)
+// }
+
+
+
 }))
 module.exports = router;

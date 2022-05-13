@@ -260,7 +260,11 @@ router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
 router.post(
   "/demo",
   asyncHandler(async (req, res) => {
-    const user = await db.User.findByPk(7);
+    const user = await db.User.findOne({
+      where: {
+        email: 'karmaissniping@dmxs8.com'
+      }
+    });
     console.log(user)
     signinUser(req, res, user);
     console.log(req.session.auth)

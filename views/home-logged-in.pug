@@ -17,7 +17,8 @@ block content
                         th Add To Favorites
                 tbody
                     each album in albums
-                      tr(class=`albumRow-${album.id}`)
+                      tr(class=`albumRow-${album.id}` )
+                        div(class='home-album-container')
                           td
                             a(href=`/albums/${album.id}` class='home-album-link')
                               img(src= album.url)
@@ -27,7 +28,7 @@ block content
                           td= album.rating
                           td
                             button(type='button' class='fave btn' id=`${album.id}`) Add
-    div(class="side-list")
+  div(class="side-list")
       div
         h3 Editors Choice
         p This month we have a wide selection of albums that caught my eye.

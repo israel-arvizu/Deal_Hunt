@@ -184,7 +184,13 @@ router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(as
     })
 
   } else {
-    res.render('guest-album-page', {title: `MusicHunt: ${album.name}`, album, songListArr, reviews})
+    res.render('guest-album-page', {title: `MusicHunt: ${album.name}`,
+      title: `Music Hunt: ${album.name}`,
+      album,
+      songListArr,
+      reviews,
+      errors: [],
+      csrfToken: req.csrfToken()})
 }
 
 }))

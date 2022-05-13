@@ -1,3 +1,30 @@
 extends guest-layout.pug
 block content
-    h1 Guest Album Page
+    block content
+    h1 #{album.name}
+    img(src= album.url)
+    h3 by #{album.artist}
+    h4 Release Date: #{album.releaseDate}
+
+    div(id='song-list')
+        h2 Song List
+        ol
+            each song in songListArr
+                li #{song}
+
+    div(id='reviews-container')
+        h2 Reviews
+        ul
+            each review in reviews
+                li
+                    p #{review.content}
+                    span #{review.createdAt}
+                if review.userId === userId
+                    button(type='button' class='edit-review btn' id=`${review.id}`) Edit
+                    button(type='button' class='delete-review btn' id=`${review.id}`) Delete
+        div(id='leave-review')
+            h2 Sign In or Create An Account to leave a Review!
+            a(href='/users/signin')
+                button(type='button' class='review-signin') Sign In
+            a(href='/users/signup')
+                button(type='button' class='review-signup') Create Account

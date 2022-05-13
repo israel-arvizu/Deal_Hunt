@@ -21,7 +21,10 @@ block content
                           td= album.name
                           td= album.artist
                           td= album.releaseDate
-                          td= album.songList
+                          td
+                            ol
+                                each song in album.songList.split("%")
+                                    li #{song}
                           td= album.rating
                           td
                             button(type='button' class='fave btn' id=`${album.id}`) Add

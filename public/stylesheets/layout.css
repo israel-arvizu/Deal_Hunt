@@ -1,0 +1,43 @@
+.nav-bar {
+   display: flex;
+   align-items: center;
+   justify-content:space-between;
+   margin: 20px 20px;
+}
+
+#header-border {
+    border-bottom: 1px #E0E3D1 solid;
+    margin: 0px;
+}
+
+#left_nav {
+    display:flex;
+    justify-content: space-between;
+
+}
+
+#left_nav > * {
+    padding-right: 20px;
+}
+
+.nav-buttons > * {
+    padding-right: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: 
+
+}
+
+#query {
+    width: 200px;
+    height: 30px;
+    background-color: #ebe6e1;
+    border: none;
+}
+
+.search {
+    height: 30px;
+    margin-left: 5px;
+    border: none;
+    background-color: #6D8B74;
+}

@@ -189,9 +189,10 @@ router.get('/:id(\\d+)/favoritelist',csrfProtection,  asyncHandler(async(req, re
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
+  const currUser = await db.User.findByPk(userId);
   const [favListQuery, metadata] = await sequelize.query(`SELECT name, artist FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
-  // console.log(requestedUser);
-  // console.log(userId)
+
+
   if(userId === parseInt(requestedUser)){
     const user = await db.User.findByPk(userId);
 
@@ -199,11 +200,11 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
       title: `${user.firstName}'s Page`,
       favListQuery,
       userId,
+      currUser,
       csrfToken: req.csrfToken()
     })
 
-  } else {
-
+  }else {
     const originUser = await db.User.findByPk(requestedUser);
     res.render('guest-page', {
       title: `${originUser.firstName}'s Page`,
@@ -212,8 +213,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
       csrfToken: req.csrfToken()
     })
   }
-  // res.send('Not Authethicated')
-  next();
+
 }))
 
 router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {

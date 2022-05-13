@@ -30,12 +30,13 @@ router.get('/',csrfProtection, asyncHandler(async(req, res, next)=> {
       csrfToken: req.csrfToken()
 
     });
-  }else
-    res.render('home-guest', {
-    title: 'Home',
-    albums,
-    csrfToken: req.csrfToken()
-});
+  }else{
+      res.render('home-guest', {
+      title: 'Home',
+      albums,
+      csrfToken: req.csrfToken()
+    });
+  }
 }));
 
 
@@ -53,7 +54,7 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
       userId,
       csrfToken: req.csrfToken()
     })
-  } else {
+  }else {
     res.render('albums-guest', {
       title: 'Albums',
       albums,

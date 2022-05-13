@@ -1,0 +1,33 @@
+extends guest-layout.pug
+
+block content
+    div
+        h1 Top 10 Charted Albums of the Month
+        div(class="top-ten")
+            body
+                table
+                    thead
+                        tr
+                            th Album
+                            th Artist
+                            th Release Date
+                            th Song List
+                            th Rating
+                            th Add to Favorite
+                    tbody
+                        each album in albums
+                            tr
+                                td= album.name
+                                td= album.artist
+                                td= album.releaseDate
+                                td= album.songList
+                                td= album.rating
+                                td
+                                    a(href='/users/signin')
+                                        button(type='button' class='fave btn' id=`${album.id}`) Add
+        div(class="side-list")
+            div
+            h3 Editors Choice
+            p This month we have a wide selection of albums that caught my eye.
+            div
+                p PLACE HOLDER FOR STATS PICTURE

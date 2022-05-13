@@ -3,7 +3,8 @@ html
   head
       block head
         title= title
-        link(rel='stylesheet' href='/stylesheets/reset.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
+        script(src="/javascripts/addToFave.js" type='module')
   body
     div(class="nav-bar")
         div(class="logo")
@@ -11,24 +12,18 @@ html
         div(class="nav-buttons")
             a(href='/') Home
             a(href='/albums') Albums
-            a(href='/') Tools
-            a(href='/') Community
             a(href='/about') About
         div(class=right-sector)
-            a(href='/users/signout')
-                input(type="button" class="signout btn" value="Sign Out")
-            div
-                label(for='profile_menu') User's Name
-                    select(name= 'profile_menu' id= 'profile_menu')
-                        a(href='/users/:id')
-                            option(type='button' class='dropdown btn') Profile
-                        a(href='/users/settings')
-                            option(type='button' class='dropdown btn') Settings
-                        a(href='/users/:id/favoriteList')
-                            option(type='button' class='dropdown btn') My Albums
-                        a(href='/users/signout')
-                            option(type='button' class='dropdown btn') Log Out
-            img(src='public/favicon.ico')
+            img(src='/favicon.ico')
+            div(class='dropdown')
+                button(class='dropbtn') User's Name
+                div(class='dropdown-content')
+                    a(href=`/users/${userId}`) Profile
+                    a(href='/settings') Settings
+                    a(href=`/users/${userId}/favoritelist`) Favorite List
+                    a(href='/users/signout') Sign Out
+
+
 
 
     block content

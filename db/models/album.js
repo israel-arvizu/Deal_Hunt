@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     rating: {
      type: DataTypes.NUMERIC(2, 1)
     },
+    url: {
+      type: DataTypes.STRING(255),
+     },
   }, {});
   Album.associate = function(models) {
     // associations can be defined here

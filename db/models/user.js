@@ -26,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       otherKey: 'albumId'})
     User.hasMany(models.Review, { foreignKey: 'userId' })
-    User.hasMany(models.Comment, { foreignKey: 'userId' })
 
   };
   return User;

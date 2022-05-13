@@ -122,8 +122,12 @@ router.get('/signin', csrfProtection, asyncHandler (async(req, res, next) => {
 
 const signInValidators = [
  check('email')
-  .exists({ checkFalsy: true })
-  .withMessage('Please provide a value for Email Address'),
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address')
+    .isLength({ max: 255 })
+    .withMessage('Email Address must not be more than 255 characters long')
+    .isEmail()
+    .withMessage('Email Address is not a valid email'),
  check('hashedPassword')
   .exists({ checkFalsy: true })
   .withMessage('Please provide a value for Password'),
@@ -138,26 +142,23 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     const validatorErrors = validationResult(req)
 
     if(validatorErrors.isEmpty()){
-
-
       const user = await db.User.findOne({
           where: { email }
       })
 
       if (user) {
-          const userPass = user.hashedPassword
-
-
-      const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
-          if (checkedVar) {
-            signinUser(req, res, user);
-            res.redirect('/')
-          }
+        const userPass = user.hashedPassword
+        const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
+        if (checkedVar) {
+          signinUser(req, res, user);
+          res.redirect('/')
+        }
         errors.push("Failed Login")
-      }
-    } else {
-          errors = validatorErrors.array().map((error) => error.msg);
-    }
+      }else
+      errors.push("Failed Login")
+    }else
+      errors = validatorErrors.array().map((error) => error.msg);
+
     res.render('signin', {
         title:"Sign In",
         email,

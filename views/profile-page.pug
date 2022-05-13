@@ -1,16 +1,28 @@
 extends layout.pug
 
 block content
+
     div(class="profile-bar")
+        div(class='profile-picture')
+        div(class='profile-info')
+            a(class='profile-name')
+    h2 Your Favorite List
     div(class="profile-body")
         body
             table
                 thead
                     tr
-                        th Album
+                        th Album Name
                         th Artist
+                        th Realease Date
+                        //- th Song List
+                        th Remove Album
+
                 tbody
-                    each album in favListQuery
-                        tr
-                            td= album.name
-                            td= album.artist
+                        each album in favListQuery
+                                tr(id=`container-${album.albumId}`)
+                                    td= album.name
+                                    td= album.artist
+                                    td= album.releaseDate
+                                    td
+                                        button(type='button' class='removeFave btn' id=`${album.albumId}`) Remove

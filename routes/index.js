@@ -43,6 +43,8 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   const albums = await db.Album.findAll();
 
+  console.log(albums.forEach(album => {console.log(album.name)}))
+
   if(req.session.auth){
     const { userId } = req.session.auth
     res.render('albums', {
@@ -51,13 +53,13 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
       userId,
       csrfToken: req.csrfToken()
     })
-  }
-
-  res.render('albums-guest', {
-    title: 'Albums',
-    albums,
-    csrfToken: req.csrfToken()
-  })
+  } else {
+    res.render('albums-guest', {
+      title: 'Albums',
+      albums,
+      csrfToken: req.csrfToken()
+    })
+}
 }));
 
 router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
@@ -251,7 +253,9 @@ console.log(validatorErrors.isEmpty())
 router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
   // const value = document.querySelector('#query').value
   const {SearchName} = req.body
-  const {userId} = req.session.auth;
+  if(req.session.auth){
+    const {userId} = req.session.auth;
+  }
   // console.log(SearchName)
   let searchArray = SearchName.split(' ')
   let searchFilters = []
@@ -267,10 +271,6 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
 
   })
 
-
-  // console.log( 'FILTERED PUSH =========',newArr)
-
-  // const filteredResults = albumResults.name.includes(SearchName)
   if (req.session.auth) {
 
     res.render('search-results', {

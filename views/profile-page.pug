@@ -4,40 +4,40 @@ block content
 
     div(class="profile-bar")
         div(class='profile-picture')
-            img(class='profile-image')
+            img(class='profile-image' src='/profile-pic.jpg')
         div(class='profile-info')
-            h3(class='profile-name') #{currUser.firstName + ' '+ currUser.lastName}
+            p(class='profile-name') #{currUser.firstName + ' '+ currUser.lastName}
             a(href=`/settings`)
                 button(type='button' class='profile-edit btn') Edit Profile
-
-    h2 Your Favorite List
     div(class="profile-body")
-        body
-            table
-                thead
-                    tr
-                        th
-                        th Album Name
-                        th Artist
-                        th Realease Date
-                        //- th Song List
-                        th Remove Album
+        h2 Your Favorite List
+        div(class="profile-table")
+            body
+                table
+                    thead
+                        tr
+                            th
+                            th Album Name
+                            th Artist
+                            th Realease Date
+                            //- th Song List
+                            th Remove Album
 
-                tbody
-                        each album in favListQuery
-                                tr(id=`container-${album.albumId}`)
-                                    td
-                                        a(href=`/albums/${album.id}` class='home-album-link')
-                                            img(src= album.url)
-                                    td= album.name
-                                    td= album.artist
-                                    td= album.releaseDate
-                                    td
-                                        button(type='button' class='removeFave btn' id=`${album.albumId}`) Remove
-    div(class="profile-sidebar")
-        div(class='member-since-container')
-            h3 Thanks for being a member!
-            h4 Member since #{currUser.createdAt.getUTCMonth() + 1}/#{currUser.createdAt.getUTCDate()}/#{currUser.createdAt.getUTCFullYear()}
-        div(class='associated-links')
-            a(href='/about') About
-            p(class='company') Three Musketeers Co. ©
+                    tbody
+                            each album in favListQuery
+                                    tr(id=`container-${album.albumId}`)
+                                        td
+                                            a(href=`/albums/${album.id}` class='home-album-link')
+                                                img(src= album.url)
+                                        td= album.name
+                                        td= album.artist
+                                        td= album.releaseDate
+                                        td
+                                            button(type='button' class='removeFave btn' id=`${album.albumId}`) Remove
+        div(class="profile-sidebar")
+            div(class='member-since-container')
+                h3 Thanks for being a member!
+                h4 Member since #{currUser.createdAt.getUTCMonth() + 1}/#{currUser.createdAt.getUTCDate()}/#{currUser.createdAt.getUTCFullYear()}
+            div(class='associated-links')
+                a(href='/about') About
+                p(class='company') Three Musketeers Co. ©

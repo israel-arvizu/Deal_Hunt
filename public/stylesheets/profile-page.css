@@ -1,0 +1,28 @@
+body{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 350;
+}
+
+.profile-bar{
+    display: flex;
+    flex-direction: row;
+    padding-left: 400px;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 50px;
+}
+
+.profile-info{
+    padding-left: 2em;
+}
+.profile-bar{
+    background-color: aqua;
+    height: 250px;
+}
+
+.profile-image{
+    max-width: 200px;
+    min-width: 50px;
+    border-radius: 100px;
+}

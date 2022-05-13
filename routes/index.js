@@ -234,6 +234,17 @@ router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
   }
 }))
 
+router.put('/reviews/edit/:id(\\d+)', asyncHandler(async(req, res) => {
+  const reviewId = req.params.id
+  const review = await db.Review.findByPk(reviewId)
 
+  review.content = req.body.content
+  await review.save()
+  // res.redirect(`/reviews/edit/${review.albumId}`)
+  res.json({
+    message: 'Success',
+    review
+  })
+}))
 
 module.exports = router;

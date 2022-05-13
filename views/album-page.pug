@@ -1,3 +1,32 @@
 extends layout.pug
 block content
-    h1 Album Page
+    h1 #{album.name}
+    img(src= album.url)
+    h3 by #{album.artist}
+    h4 Release Date: #{album.releaseDate}
+
+    div(id='song-list')
+        h2 Song List
+        ol
+            each song in songListArr
+                li #{song}
+
+    div(id='reviews-container')
+        h2 Reviews
+        ul
+            each review in reviews
+                li
+                    p #{review.content}
+                    span #{review.createdAt}
+                if review.userId === userId
+                    button(type='button' class='edit-review btn' id=`${review.id}`) Edit
+                    button(type='button' class='delete-review btn' id=`${review.id}`) Delete
+        div(id='leave-review')
+            h2 Leave a Review
+            form(action=`/albums/${album.id}` method='post')
+                input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                textarea(type="text" id="newReview" name="content" value=newReview.content placeholder="Your review..." required )
+                button(type='submit') Post Review
+    if errors.length > 0
+        each err in errors
+            p= err

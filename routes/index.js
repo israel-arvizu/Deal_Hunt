@@ -128,27 +128,92 @@ router.post('/settings', csrfProtection, updateValidator, asyncHandler(async(req
 
 
 router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(async(req, res) => {
-  res.send("WWWWWWWWWWW")
+
   const albumId = req.params.id;
-  const album = db.Album.findByPk(albumId)
-  const reviews = db.Review.findAll({
+  const album = await db.Album.findByPk(albumId);
+  const songListArr = album.songList.split("%");
+  const reviews = await db.Review.findAll({
     where: {
       albumId
-
     },
     order: [['createdAt', 'DESC']]
+    })
 
-  })
+  if (req.session.auth) {
+    const { userId } = req.session.auth;
+    const newReview = db.Review.build();
 
-//   if (req.session.auth) {
-//     const { userId } = req.session.auth;
+    res.render('album-page', {
+      title: `MusicHunt: ${album.name}`,
+      album,
+      userId,
+      newReview,
+      songListArr,
+      reviews,
+      csrfToken: req.csrfToken(),
+      errors: [],
+    })
 
-//     res.render('album-page', album, userId, reviews)
-// } else {
-//     res.render('guest-album-page', album, userId, reviews)
-// }
-
-
+  } else {
+    res.render('guest-album-page', {title: `MusicHunt: ${album.name}`, album, songListArr, reviews})
+}
 
 }))
+
+const newReviewValidator = [
+  check('content')
+  .exists({ checkFalsy: true })
+  .withMessage('Please provide the content of the review')
+  .isLength({ max: 2500 })
+  .withMessage('Content must not be more than 2500 characters long'),
+]
+
+router.post('/albums/:id(\\d+)', csrfProtection, newReviewValidator, asyncHandler(async(req, res, next) => {
+  console.log("ENTERED POST")
+  const albumId = req.params.id;
+  const { userId } = req.session.auth;
+  const album = await db.Album.findByPk(albumId)
+  const songListArr = album.songList.split("%")
+  const reviews = await db.Review.findAll({
+    where: {
+      albumId
+    },
+    order: [['createdAt', 'ASC']]
+    })
+if(reviews) {console.log("successful reviews")}
+  const {
+    content
+  } = req.body;
+  const newReview = db.Review.build({
+    albumId,
+    userId,
+    content
+  })
+
+  const validatorErrors = validationResult(req);
+console.log(validatorErrors.isEmpty())
+  if(validatorErrors.isEmpty()){
+    await newReview.save();
+    res.redirect(`/albums/${albumId}`)
+
+
+}else {
+    const errors = validatorErrors.array().map((error) => error.msg);
+    res.render('album-page', {
+      title: `MusicHunt: ${album.name}`,
+      album,
+      userId,
+      newReview,
+      songListArr,
+      reviews,
+      csrfToken: req.csrfToken(),
+      errors,
+    })
+}
+}))
+
+
+
+
+
 module.exports = router;

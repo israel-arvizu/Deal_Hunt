@@ -18,7 +18,7 @@ module.exports = {
       },
       releaseDate: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
       },
       songList: {
         allowNull: false,
@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.NUMERIC(2, 1)
       },
       url: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(2000)
       },
       createdAt: {
         allowNull: false,

@@ -1,0 +1,2 @@
+check IMG url and fix it in HEROKO to see if img is loaded .
+src img tag for IMGS in seedeer data .

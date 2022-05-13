@@ -43,7 +43,6 @@ router.get('/',csrfProtection, asyncHandler(async(req, res, next)=> {
 router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   const albums = await db.Album.findAll();
-
   console.log(albums.forEach(album => {console.log(album.name)}))
 
   if(req.session.auth){

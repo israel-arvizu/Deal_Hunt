@@ -220,13 +220,23 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
   const albumId = await db.Album.findByPk(req.params.id);
   const {userId} = req.session.auth;
 
+
+  console.log('IN PROGRESSSS -----------:')
+  const albumCheck = await db.FavoriteList.findOne({
+    [Op.and]: [
+      {userId: userId},
+      {albumId: albumId}
+    ]
+  })
+
+
+  console.log('ENTERED:', albumCheck)
   if(userId) {
     const addedAlbum = await db.FavoriteList.build({
-        userId,
-        albumId: +req.params.id
+      userId,
+      albumId: +req.params.id
     })
 
-    console.log(addedAlbum);
     await addedAlbum.save();
 
     res.json({
@@ -238,6 +248,7 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
     })
     window.location.href = "/users/signin";
   }
+
 }))
 
 router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {

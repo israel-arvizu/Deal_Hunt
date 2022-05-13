@@ -18,9 +18,10 @@ faveButtonArray.forEach(button => {
 
         if(data.message === 'Added'){
             alert('Worked');
-        }else{
+        }else {
             alert('Failed');
         }
+
     })
 })
 

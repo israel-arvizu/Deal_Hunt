@@ -250,6 +250,28 @@ console.log(validatorErrors.isEmpty())
 }
 }))
 
+router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
+  const {userId} = req.session.auth;
+  console.log('USER ID: ', userId)
+  const reviewId = req.params.id;
+  console.log('REVIEW ID: ', reviewId)
+  const review = await db.Review.findByPk(reviewId);
+  console.log('REVIEW ', review)
+
+  if(userId){
+    review.destroy();
+    console.log('Destroyed Review')
+    res.json({
+      message: 'Destroyed'
+    })
+
+
+  }else{
+    res.json({
+      message: 'Failed'
+    })
+  }
+}))
 
 router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
   // const value = document.querySelector('#query').value
@@ -269,6 +291,19 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
 
     })
 
+
+router.put('/reviews/edit/:id(\\d+)', asyncHandler(async(req, res) => {
+  const reviewId = req.params.id
+  const review = await db.Review.findByPk(reviewId)
+
+
+  review.content = req.body.content
+  await review.save()
+  // res.redirect(`/reviews/edit/${review.albumId}`)
+  res.json({
+    message: 'Success',
+    review
+  })
 
   })
 

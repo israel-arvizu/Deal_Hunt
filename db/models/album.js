@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      allowNull: false,
     },
     releaseDate: {
-     type: DataTypes.DATE,
+     type: DataTypes.DATEONLY,
      allowNull: false,
     },
     songList: {
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.NUMERIC(2, 1)
     },
     url: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(2000),
      },
   }, {});
   Album.associate = function(models) {

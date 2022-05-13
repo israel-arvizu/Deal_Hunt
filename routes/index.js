@@ -7,7 +7,7 @@ const { sequelize } = require('../db/models');
 const { Op } = require("sequelize");
 
 /* GET home page. */
-router.get('/', asyncHandler(async(req, res, next)=> {
+router.get('/',csrfProtection, asyncHandler(async(req, res, next)=> {
 
   const albums = await db.Album.findAll({
     order: [['rating', 'DESC']],
@@ -20,32 +20,61 @@ router.get('/', asyncHandler(async(req, res, next)=> {
     const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${userId})`)
     let songArray = [];
     const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
-    res.render('home-logged-in', {title: 'Home', albums, userId ,loggedInUser, songs, favListQuery});
+    res.render('home-logged-in', {
+      title: 'Home',
+      albums,
+      userId ,
+      loggedInUser,
+      songs,
+      favListQuery,
+      csrfToken: req.csrfToken()
+
+    });
   }else
-    res.render('home-guest', {title: 'Home', albums});
+    res.render('home-guest', {
+    title: 'Home',
+    albums,
+    csrfToken: req.csrfToken()
+});
 }));
 
 
-router.get('/albums', asyncHandler(async (req, res) =>{
+router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   const albums = await db.Album.findAll();
 
   if(req.session.auth){
     const { userId } = req.session.auth
-    res.render('albums', {title: 'Albums', albums, userId})
+    res.render('albums', {
+      title: 'Albums',
+      albums,
+      userId,
+      csrfToken: req.csrfToken()
+    })
   }
 
-  res.render('albums-guest', {title: 'Albums', albums})
+  res.render('albums-guest', {
+    title: 'Albums',
+    albums,
+    csrfToken: req.csrfToken()
+  })
 }));
 
-router.get('/about', (req, res) => {
+router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
   if(req.session.auth){
     const { userId } = req.session.auth
-    res.render('about', {Title: 'About', userId})
+    res.render('about', {
+      Title: 'About',
+      userId,
+      csrfToken: req.csrfToken()
+    })
   }
 
-  res.render('guest-about', {Title: 'About'})
-});
+  res.render('guest-about', {
+    Title: 'About',
+    csrfToken: req.csrfToken()
+  })
+}));
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
   const { userId } = req.session.auth;
@@ -213,7 +242,46 @@ console.log(validatorErrors.isEmpty())
 }))
 
 
+router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
+  // const value = document.querySelector('#query').value
+  const {SearchName} = req.body
+  const {userId} = req.session.auth;
+  // console.log(SearchName)
+  let searchArray = SearchName.split(' ')
+  let searchFilters = []
+  const albumResults = await db.Album.findAll()
+    albumResults.map(album => {
+    searchArray.map(filtered => {
+   if (album.name.toLowerCase().includes(filtered.toLowerCase())) {
+     searchFilters.push(album)
+   }
+
+    })
 
 
+  })
+
+
+  // console.log( 'FILTERED PUSH =========',newArr)
+
+  // const filteredResults = albumResults.name.includes(SearchName)
+  if (req.session.auth) {
+
+    res.render('search-results', {
+      title: 'search-results',
+      errors: [],
+      csrfToken: req.csrfToken(),
+      searchFilters,
+      userId
+    })
+  } else {
+    res.render('guest-search-results', {
+      title: 'Search-Results',
+      errors: [],
+      csrfToken: req.csrfToken(),
+      searchFilters
+    })
+  }
+}))
 
 module.exports = router;

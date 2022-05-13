@@ -15,12 +15,12 @@ block content
         h2 Reviews
         ul
             each review in reviews
-                li
+                li(id=`container-${review.id}`)
                     p #{review.content}
                     span #{review.createdAt}
-                if review.userId === userId
-                    button(type='button' class='edit-review btn' id=`${review.id}`) Edit
-                    button(type='button' class='delete-review btn' id=`${review.id}`) Delete
+                    if review.userId === userId
+                        button(type='button' class='edit-review btn' id=`${review.id}`) Edit
+                        button(type='button' class='delete-review btn' id=`${review.id}`) Delete
         div(id='leave-review')
             h2 Leave a Review
             form(action=`/albums/${album.id}` method='post')

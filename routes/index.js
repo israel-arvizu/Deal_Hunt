@@ -212,7 +212,27 @@ console.log(validatorErrors.isEmpty())
 }
 }))
 
+router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
+  const {userId} = req.session.auth;
+  console.log('USER ID: ', userId)
+  const reviewId = req.params.id;
+  console.log('REVIEW ID: ', reviewId)
+  const review = await db.Review.findByPk(reviewId);
+  console.log('REVIEW ', review)
 
+  if(userId){
+    review.destroy();
+    console.log('Destroyed Review')
+    res.json({
+      message: 'Destroyed'
+    })
+
+  }else{
+    res.json({
+      message: 'Failed'
+    })
+  }
+}))
 
 
 

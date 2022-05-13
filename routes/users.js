@@ -166,21 +166,26 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     })
 }))
 
-router.get('/signout', (req, res) => {
+router.get('/signout', csrfProtection, asyncHandler(async(req, res) => {
   signoutUser(req, res);
   res.redirect('/');
-})
+}))
 
-router.get('/:id(\\d+)/favoritelist', asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)/favoritelist',csrfProtection,  asyncHandler(async(req, res) => {
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
   const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
   let songArray = [];
   const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
-  res.render('favorite-list', {favListQuery, songArray, userId});
+  res.render('favorite-list', {
+    favListQuery,
+    songArray,
+    userId,
+    csrfToken: req.csrfToken()
+  });
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res, next)=>{
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
   const [favListQuery, metadata] = await sequelize.query(`SELECT name, artist FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
@@ -192,7 +197,8 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res, next)=>{
     res.render('profile-page', {
       title: `${user.firstName}'s Page`,
       favListQuery,
-      userId
+      userId,
+      csrfToken: req.csrfToken()
     })
 
   } else {
@@ -201,7 +207,8 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res, next)=>{
     res.render('guest-page', {
       title: `${originUser.firstName}'s Page`,
       favListQuery,
-      userId
+      userId,
+      csrfToken: req.csrfToken()
     })
   }
   // res.send('Not Authethicated')

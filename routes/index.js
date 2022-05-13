@@ -39,26 +39,42 @@ router.get('/',csrfProtection, asyncHandler(async(req, res, next)=> {
 }));
 
 
-router.get('/albums', asyncHandler(async (req, res) =>{
+router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   const albums = await db.Album.findAll();
 
   if(req.session.auth){
     const { userId } = req.session.auth
-    res.render('albums', {title: 'Albums', albums, userId})
+    res.render('albums', {
+      title: 'Albums',
+      albums,
+      userId,
+      csrfToken: req.csrfToken()
+    })
   }
 
-  res.render('albums-guest', {title: 'Albums', albums})
+  res.render('albums-guest', {
+    title: 'Albums',
+    albums,
+    csrfToken: req.csrfToken()
+  })
 }));
 
-router.get('/about', (req, res) => {
+router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
   if(req.session.auth){
     const { userId } = req.session.auth
-    res.render('about', {Title: 'About', userId})
+    res.render('about', {
+      Title: 'About',
+      userId,
+      csrfToken: req.csrfToken()
+    })
   }
 
-  res.render('guest-about', {Title: 'About'})
-});
+  res.render('guest-about', {
+    Title: 'About',
+    csrfToken: req.csrfToken()
+  })
+}));
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
   const { userId } = req.session.auth;
@@ -228,15 +244,26 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
 
   })
 
+
   // console.log( 'FILTERED PUSH =========',newArr)
 
   // const filteredResults = albumResults.name.includes(SearchName)
-  res.render('search-results', {
-    title: 'search-results',
-    errors: [],
-    csrfToken: req.csrfToken(),
-    searchFilters
-  })
+  if (req.session.auth) {
+
+    res.render('search-results', {
+      title: 'search-results',
+      errors: [],
+      csrfToken: req.csrfToken(),
+      searchFilters
+    })
+  } else {
+    res.render('guest-search-results', {
+      title: 'Search-Results',
+      errors: [],
+      csrfToken: req.csrfToken(),
+      searchFilters
+    })
+  }
 }))
 
 

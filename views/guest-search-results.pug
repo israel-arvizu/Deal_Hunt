@@ -1,0 +1,7 @@
+extends guest-layout.pug
+block content
+    h1 Results
+    div(name='Results List')
+        ul
+            each result in searchFilters
+                li #{result.name}, #{result.artist}

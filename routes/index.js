@@ -47,10 +47,12 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   if(req.session.auth){
     const { userId } = req.session.auth
+    const loggedInUser = await db.User.findByPk(userId)
     res.render('albums', {
       title: 'Albums',
       albums,
       userId,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
   }else {

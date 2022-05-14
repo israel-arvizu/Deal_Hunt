@@ -5,6 +5,10 @@ html
         title= title
         link(rel='stylesheet' href='/stylesheets/index.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
+        link(rel='stylesheet' href='/stylesheets/home.css')
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,500&family=PT+Sans&family=Varela+Round&display=swap" rel="stylesheet")
         script(src="/javascripts/addToFave.js" type='module')
         script(src="/javascripts/deleteReview.js" type="module")
         script(src="/javascripts/editReview.js" type="module")
@@ -18,9 +22,9 @@ html
                     input(type="hidden" class='token' name="_csrf" value=csrfToken)
                     button(class="search btn") Search
             div(class="nav-buttons")
-                a(href='/') Home
-                a(href='/albums') Albums
-                a(href='/about') About
+                a(href='/' class='nav') Home
+                a(href='/albums' class='nav') Albums
+                a(href='/about' class='nav') About
         div(id='right_nav')
             div(class='dropdown')
                 button(class='dropbtn') User's Name

@@ -1,33 +1,36 @@
 extends guest-layout.pug
 
 block content
-    div
+    div(class='greeting')
+        h2 Welcome to Music Hunt!
         h1 Top 10 Charted Albums of the Month
-        div(class="top-ten")
-            body
-                table
-                    thead
-                        tr
-                            th Album
-                            th Artist
-                            th Release Date
-                            th Rating
-                            th Add to Favorite
-                    tbody
-                        each album in albums
-                            tr(class=`albumRow-${album.id}`)
-                                td
-                                    a(href=`/albums/${album.id}` class='home-album-link')
-                                        img(src= album.url)
-                                td= album.name
-                                td= album.artist
-                                td= album.releaseDate
-                                td= album.rating
-                                td
-                                    button(type='button' class='fave btn' id=`${album.id}`) Add
+
+    div(class="home")
+        table(id='top-ten')
+            thead
+                tr
+                    th(class='head-row')
+                    th(class='head-row') Album
+                    th(class='head-row') Artist
+                    th(class='head-row') Release Date
+                    th(class='head-row') Rating
+                    th(class='head-row') Fav it!
+            tbody
+                each album in albums
+                  tr(class=`albumRow-${album.id}`)
+                      td(class='tbl-rows')
+                        a(href=`/albums/${album.id}` class='home-album-link')
+                          img(src= album.url class='album')
+                      td(class='tbl-rows')= album.name
+                      td(class='tbl-rows')= album.artist
+                      td(class='tbl-rows')= album.releaseDate
+                      td(class='tbl-rows')= album.rating
+                      td(class='tbl-rows')
+                        button(type='button' class='fave btn' id=`${album.id}`) Add
+        div(id="vertical-separator")
         div(class="side-list")
-            div
+          div
             h3 Editors Choice
             p This month we have a wide selection of albums that caught my eye.
             div
-                p PLACE HOLDER FOR STATS PICTURE
+              p PLACE HOLDER FOR STATS PICTURE

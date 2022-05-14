@@ -52,6 +52,12 @@ body {
     border: none;
 }
 
+#query:hover {
+  width: 500px;
+  height: auto;
+  z-index: 1;
+}
+
 .search {
     height: 30px;
     /* margin-left: 5px; */

@@ -24,7 +24,7 @@ block content
                           td= album.artist
                           td= album.releaseDate
                           td
-                            ol
+                            ul
                                 each song in album.songList.split("%")
                                     li #{song}
                           td= album.rating

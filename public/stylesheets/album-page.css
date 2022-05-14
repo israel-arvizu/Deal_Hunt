@@ -1,0 +1,35 @@
+* {
+    /* background-color: red; */
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    background-color: #f9f3e1 ;
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+th  {
+    font-size: 24px;
+}
+
+img {
+
+    border-radius: 10px;
+    max-width: 200px;
+    max-height: 250px;
+}
+
+img:hover {
+
+    font-size: 16px;
+
+    color: #fff;
+    cursor: pointer;
+    text-align:center;
+    border: none;
+
+    border-radius: 38px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-color: rgba(0,0,0,75%);
+}

@@ -1,6 +1,19 @@
 body{
     font-family: 'DM Sans', sans-serif;
-    font-weight: 350;
+    background-color: #f9f3e1;
+    margin: 0px
+}
+
+#favList-break{
+    width: 90%;
+    border: 1px solid rgb(149, 150, 147)
+
+}
+
+.headline-fav{
+    margin: 0px;
+    margin-bottom: 15px;
+    border-top: 15px solid #5F7161 ;
 }
 
 .profile-bar{
@@ -8,21 +21,57 @@ body{
     flex-direction: row;
     padding-left: 400px;
     align-items: center;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 800;
-    font-size: 50px;
 }
 
+.profile-name{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 35px;
+}
 .profile-info{
     padding-left: 2em;
 }
 .profile-bar{
-    background-color: aqua;
+    background-color: rgb(109, 139, 116);
     height: 250px;
+    border-top: 15px solid #5F7161;
 }
 
 .profile-image{
     max-width: 200px;
     min-width: 50px;
     border-radius: 100px;
+}
+
+.profile-body{
+    background-color: rgb(208, 201, 192);
+}
+.home-table-section{
+    padding: 20px;
+}
+
+.album-image{
+    max-width: 150px;
+    min-width: 50px;
+    max-height: 150px;
+    border-radius: 40px;
+}
+.profile-table#album-tab{
+    font-size: 20px;
+    font-weight: 100;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.btn{
+    color: grey;
+    background-color: rgb(168, 166, 166);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 100;
+    line-height: 1;
+    margin-top: 1.5rem;
+    width: 75%;
+    border: 1px solid cornflowerblue;
+    border-radius: 15px;
 }

@@ -10,8 +10,9 @@ block content
             a(href=`/settings`)
                 button(type='button' class='profile-edit btn') Edit Profile
     div(class="profile-body")
-        h2 Your Favorite List
-        div(class="profile-table")
+        h2(class='headline-fav') Your Favorite List
+        hr(id='favList-break' class='seperatation-lines')
+        div(class="profile-table" id='album-tab')
             body
                 table
                     thead
@@ -26,13 +27,13 @@ block content
                     tbody
                             each album in favListQuery
                                     tr(id=`container-${album.albumId}`)
-                                        td
-                                            a(href=`/albums/${album.id}` class='home-album-link')
-                                                img(src= album.url)
-                                        td= album.name
-                                        td= album.artist
-                                        td= album.releaseDate
-                                        td
+                                        td(class='home-table-section')
+                                            a(href=`/albums/${album.id}`)
+                                                img(src= album.url class='album-image')
+                                        td(class='home-table-section')= album.name
+                                        td(class='home-table-section')= album.artist
+                                        td(class='home-table-section')= album.releaseDate
+                                        td(class='home-table-section')
                                             button(type='button' class='removeFave btn' id=`${album.albumId}`) Remove
         div(class="profile-sidebar")
             div(class='member-since-container')

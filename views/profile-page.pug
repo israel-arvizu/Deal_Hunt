@@ -17,7 +17,7 @@ block content
                 body
                     table(class='table-holder')
                         thead
-                            tr
+                            tr(class="rows")
                                 th
                                 th Album Name
                                 th Artist
@@ -27,7 +27,7 @@ block content
 
                         tbody
                                 each album in favListQuery
-                                        tr(id=`container-${album.albumId}`)
+                                        tr(id=`container-${album.albumId}` class="rows")
                                             td(class='home-table-section')
                                                 a(href=`/albums/${album.id}`)
                                                     img(src= album.url class='album-image')
@@ -39,8 +39,17 @@ block content
             div(id='sidelist-break' class='seperatation-lines')
             div(class="profile-sidebar")
                 div(class='member-since-container')
-                    h3 Thanks for being a member!
-                    h4 Member since #{currUser.createdAt.getUTCMonth() + 1}/#{currUser.createdAt.getUTCDate()}/#{currUser.createdAt.getUTCFullYear()}
+                    h3(id="thanking-line") Thanks for being a member!
+                    div(class="info-date-text")
+                        h4 Member since #{currUser.createdAt.getUTCMonth() + 1}/#{currUser.createdAt.getUTCDate()}/#{currUser.createdAt.getUTCFullYear()}
+                div(id="news-section")
+                    h3(id="news-caption") Get Caught Up
+                    hr(id="news-line-break")
+                    div(id="story-section")
+                        div(id="stories-indv")
+                            img(id='news-pic-lamar' src='/kendrick-lamar-news.jpg')
+                            p(id="story-section-text") Kendrick Just Dropped his new Album!
+                            p(id="story-section-text") Take a listen
                 div(class='associated-links')
-                    a(href='/about') About
+                    a(id="about-link-home" href='/about') About
                     p(class='company') Three Musketeers Co. ©

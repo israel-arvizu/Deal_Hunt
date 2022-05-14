@@ -67,9 +67,11 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
   if(req.session.auth){
     const { userId } = req.session.auth
+    const loggedInUser = await db.User.findByPk(userId)
     res.render('about', {
       Title: 'About',
       userId,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
   }
@@ -82,18 +84,18 @@ router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
   const { userId } = req.session.auth;
-  const user = await db.User.findByPk(userId);
-  console.log(user)
-  const {
-    firstName,
-    lastName,
-    // email
-  } = user;
+  const loggedInUser = await db.User.findByPk(userId);
+  console.log(loggedInUser)
+  // const {
+  //   firstName,
+  //   lastName,
+  //   // email
+  // } = loggedInUser;
 
   res.render('settings', {
     csrfToken: req.csrfToken(),
     errors: [],
-    user,
+    loggedInUser,
     title: "Settings",
     userId
   })

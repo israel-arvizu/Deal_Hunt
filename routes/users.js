@@ -189,7 +189,7 @@ router.get('/:id(\\d+)/favoritelist',csrfProtection,  asyncHandler(async(req, re
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
-  const currUser = await db.User.findByPk(userId);
+  const loggedInUser = await db.User.findByPk(userId);
   const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
 
 
@@ -200,7 +200,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
       title: `${user.firstName}'s Page`,
       favListQuery,
       userId,
-      currUser,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
 

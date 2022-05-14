@@ -7,9 +7,9 @@ block content
     form(action="/settings" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         label(for="firstName") First Name
-        input(type="text" name="firstName" required value=user.firstName)
+        input(type="text" name="firstName" required value=loggedInUser.firstName)
         label(for="lastName") Last Name
-        input(type="text" name="lastName" required value=user.lastName)
+        input(type="text" name="lastName" required value=loggedInUser.lastName)
         //- label(for="email") Email
         //- input(type="text" name="email" required value=user.email)
         button(type='submit') Save Changes

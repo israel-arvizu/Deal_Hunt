@@ -6,7 +6,7 @@ block content
         div(class='profile-picture')
             img(class='profile-image')
         div(class='profile-info')
-            h3(class='profile-name') #{currUser.firstName + ' '+ currUser.lastName}
+            h3(class='profile-name') #{loggedInUser.firstName + ' '+ loggedInUser.lastName}
             a(href=`/settings`)
                 button(type='button' class='profile-edit btn') Edit Profile
 
@@ -37,7 +37,7 @@ block content
     div(class="profile-sidebar")
         div(class='member-since-container')
             h3 Thanks for being a member!
-            h4 Member since #{currUser.createdAt.getUTCMonth() + 1}/#{currUser.createdAt.getUTCDate()}/#{currUser.createdAt.getUTCFullYear()}
+            h4 Member since #{loggedInUser.createdAt.getUTCMonth() + 1}/#{loggedInUser.createdAt.getUTCDate()}/#{loggedInUser.createdAt.getUTCFullYear()}
         div(class='associated-links')
             a(href='/about') About
             p(class='company') Three Musketeers Co. ©

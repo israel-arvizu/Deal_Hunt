@@ -4,7 +4,7 @@
     font-size: 15px;
     background-color: #f9f3e1 ;
     box-sizing: border-box;
-    padding: 3px;
+    padding: 2px
 
 }
 
@@ -68,6 +68,12 @@ td {
     text-align: center;
 }
 
+#song-name {
+    text-align: left;
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
 th {
     padding: 50px;
     max-width: fit-content;
@@ -102,4 +108,9 @@ th {
 table {
     max-width: 300px;
     max-height: 400px;
+}
+
+
+#album-Name {
+    font-size: 18px;
 }

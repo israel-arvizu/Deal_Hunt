@@ -1,35 +1,39 @@
 extends layout.pug
 block content
-    h1 #{album.name}
-    img(src= album.url)
-    h3 by #{album.artist}
-    h4 Release Date: #{album.releaseDate}
+    div(id='single-album-page')
+        div(id='single-album')
+            h1(id='album_title') #{album.name}
+            img(src= album.url id='single-album-cover')
+            h3(id='s-album-page-artist') by #{album.artist}
+            h4(id='s-album-page-release-date') Release Date: #{album.releaseDate}
 
-    div(id='song-list')
-        h2 Song List
-        ol
-            each song in songListArr
-                li #{song}
-
-    div(id='reviews-container')
-        h2 Reviews
-        ul
-            each review in reviews
-                li(id=`container-${review.id}`)
-                    p #{review.content}
-                    span #{review.createdAt}
-                    if review.userId === userId
-                        button(type='button' class='edit-review btn' id=`${review.id}`) Edit
-                        button(type='button' class='delete-review btn' id=`${review.id}`) Delete
-                        form(class='hidden' id=`edit-form-${review.id}`)
-                            input(type='text', name='content' value= review.content id=`${review.id}-edit-content`)
-                            button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
-        div(id='leave-review')
-            h2 Leave a Review
-            form(action=`/albums/${album.id}` method='post')
-                input(type="hidden" class='token' name="_csrf" value=csrfToken)
-                textarea(type="text" id="newReview" name="content" value=newReview.content placeholder="Your review..." required )
-                button(type='submit') Post Review
-    if errors.length > 0
-        each err in errors
-            p= err
+            hr(id='s-album-songs-divider')
+            div(id='s-album-song-list')
+                h2(id='s-album-songs') Song List
+                ol
+                    each song in songListArr
+                        li #{song}
+        div(id="s-album-page-vertical-separator")
+        div(id='reviews-container')
+            h2 Reviews
+            ul(id='review-list')
+                each review in reviews
+                    li(class='single-review' id=`container-${review.id}`)
+                        span #{review.User.firstName} #{review.User.lastName}
+                        p #{review.content}
+                        span #{review.createdAt}
+                        if review.userId === userId
+                            button(type='button' class='edit-review btn' id=`${review.id}`) Edit
+                            button(type='button' class='delete-review btn' id=`${review.id}`) Delete
+                            form(class='hidden' id=`edit-form-${review.id}`)
+                                input(type='text', name='content' value= review.content id=`${review.id}-edit-content`)
+                                button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
+            div(id='leave-review')
+                h2 Leave a Review
+                form(action=`/albums/${album.id}` method='post')
+                    input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                    textarea(type="text" id="newReview" name="content" value=newReview.content placeholder="Your review..." required )
+                    button(type='submit') Post Review
+        if errors.length > 0
+            each err in errors
+                p= err

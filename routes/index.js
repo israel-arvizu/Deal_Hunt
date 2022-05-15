@@ -164,12 +164,16 @@ router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(as
   const album = await db.Album.findByPk(albumId);
   const songListArr = album.songList.split("%");
   const reviews = await db.Review.findAll({
+    include: [{
+      model: db.User,
+      attributes: ['firstName', 'lastName']
+    }],
     where: {
-      albumId
+      albumId,
     },
+    // attributes: ['firstName', 'lastName'],
     order: [['createdAt', 'DESC']]
     })
-
   if (req.session.auth) {
     const { userId } = req.session.auth;
     const newReview = db.Review.build();

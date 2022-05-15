@@ -52,12 +52,6 @@ body {
     border: none;
 }
 
-#query:hover {
-  margin: 0px;
-  width: 500px;
-  height: auto;
-  z-index: 1;
-}
 
 .search-btn {
     height: 30px;

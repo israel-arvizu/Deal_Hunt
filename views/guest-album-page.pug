@@ -15,7 +15,7 @@ block content
                         li #{song}
         div(id="s-album-page-vertical-separator")
         div(id='reviews-container')
-            h2 Reviews
+            h2(id='reviews-header') Reviews
             ul(id='review-list')
                 each review in reviews
                     li(class='single-review' id=`container-${review.id}`)

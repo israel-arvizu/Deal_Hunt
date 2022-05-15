@@ -26,8 +26,8 @@ block content
                             button(type='button' class='edit-review btn' id=`${review.id}`) Edit
                             button(type='button' class='delete-review btn' id=`${review.id}`) Delete
                             form(class='hidden' id=`edit-form-${review.id}`)
-                                input(type='text', name='content' value= review.content id=`${review.id}-edit-content`)
-                                button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
+                                input(type='text', class='edit-input' name='content' value= review.content id=`${review.id}-edit-content`)
+                                button(class="edit-submit btn" id=`edit-submit-${review.id}`) Submit
             hr(id='s-album-review-divider')
             div(id='leave-review')
                 h2(class='add-review') Leave a Review

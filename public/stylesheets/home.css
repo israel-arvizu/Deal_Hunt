@@ -113,3 +113,25 @@
     margin-bottom: 30px;
     width: 400px;
 }
+
+/* linked in button */
+/*
+.linked-in-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color:#f9f3e1 ;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300px;
+    text-decoration: none;
+
+}
+
+.linked-in-btn:hover {
+    cursor: pointer;
+    color: rgb(25, 0, 255);
+    text-decoration: underline;
+
+} */

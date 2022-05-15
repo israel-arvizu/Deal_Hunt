@@ -280,5 +280,24 @@ router.post(
   })
 );
 
+router.get('/socials', csrfProtection, asyncHandler(async(req,res) => {
+  if (req.session.auth) {
+    const {userId} = req.session.auth;
+    res.render('socials', {
+      title: 'Socials',
+      userId,
+      csrfToken: req.csrfToken()
+    })
+
+  } else {
+
+    res.render('guest-socials', {
+      title: 'Guest-Socials',
+
+      csrfToken: req.csrfToken()
+    })
+  }
+}))
+
 
 module.exports = router;

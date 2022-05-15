@@ -277,7 +277,7 @@ router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
 }))
 
 router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) => {
-  // const value = document.querySelector('#query').value
+
   const {SearchName} = req.body
 
   let searchArray = SearchName.split(' ')

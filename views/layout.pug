@@ -4,6 +4,7 @@ html
       block head
         title= title
         link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/socials-page.css')
         link(rel='stylesheet' href='/stylesheets/profile-page.css')
         link(rel='stylesheet' href='/stylesheets/search-styling.css')
         link(rel='stylesheet' href='/stylesheets/about-page.css')
@@ -41,4 +42,13 @@ html
 
 
 
+
     block content
+    footer
+      div
+
+        hr(class='footer-hr')
+        div(class='wrap')
+            div(class='socials')
+
+                a(href='/users/socials' class='footer-logo') Three Musketeers Co. ©

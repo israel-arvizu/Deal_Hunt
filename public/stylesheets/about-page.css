@@ -1,0 +1,33 @@
+* {
+    font-family: 'DM Sans', sans-serif; ;
+    color: #5F7161;
+    font-weight: bolder;
+
+
+    /* background-repeat:no-repeat;
+    background-position: center center;
+    background-size: cover; */
+}
+
+h1 {
+
+    font-size: 42px;
+    color: black;
+    font-weight: bolder;
+}
+
+.back-ground{
+    background-image: url("/pngwing.com.png");
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: top;
+
+
+}
+
+h2,
+p ,
+a  {
+    background-color:transparent;
+    font-size: 30px;
+}

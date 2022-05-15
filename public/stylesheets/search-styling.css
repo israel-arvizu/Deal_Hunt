@@ -1,0 +1,48 @@
+
+.home-album-link{
+    text-decoration: none;
+}
+#results-top{
+    margin: 8px;
+}
+#top-banner-head{
+    margin-top: 5px;
+    padding: 3px;
+    border: 3px solid #D0C9C0;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.album-title-search{
+    margin: 2px;
+    font-size: 100%;
+    color: #5F7161;
+}
+.result-list{
+    display: flex;
+    flex-direction: row;
+}
+.image-search-result{
+    width: 150px;
+    border-radius: 5px;
+}
+
+.list-item{
+    list-style: none;
+}
+
+.album-artist-search{
+    margin: 3px;
+    color: #5f8167;
+}
+
+.result-individual-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#results-container{
+    margin: 10px;
+    max-width: 150px;
+}

@@ -131,3 +131,8 @@ body {
 .sign-btn:hover {
     color: #d8b800;
 }
+
+#logo-layout{
+  max-width: 60px;
+
+}

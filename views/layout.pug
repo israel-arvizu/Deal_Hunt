@@ -6,6 +6,10 @@ html
         link(rel='stylesheet' href='/stylesheets/index.css')
         link(rel='stylesheet' href='/stylesheets/profile-page.css')
         link(rel='stylesheet' href='/stylesheets/search-styling.css')
+        link(rel='stylesheet' href='/stylesheets/about-page.css')
+        link(rel='stylesheet' href='/stylesheets/album-page.css')
+        link(rel='stylesheet' href='/stylesheets/layout.css')
+        link(rel='stylesheet' href='/stylesheets/home.css')
         link(rel="preconnect" href="https://fonts.googleapis.com")
         link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
         link(href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,500&family=PT+Sans&family=Varela+Round&display=swap" rel="stylesheet")
@@ -14,25 +18,25 @@ html
         script(src="/javascripts/editReview.js" type="module")
   body
     div(class="nav-bar")
-        div(class="logo")
-        div(class="search-bar")
-            form(id="searchbar" action='/search/results' method="post")
-                input(type="search" id="query" name="SearchName" placeholder="Albums")
-                input(type="hidden" class='token' name="_csrf" value=csrfToken)
-                button Search
-        div(class="nav-buttons")
-            a(href='/') Home
-            a(href='/albums') Albums
-            a(href='/about') About
-        div(class=right-sector)
-            img(src='/favicon.ico')
+        div(id='left_nav')
+            img(src='/favicon.ico' id='logo')
+            div(class="search-bar")
+                form(id="searchbar" action='/search/results' method="post")
+                    input(type="search" id="query" name="SearchName" placeholder="Search albums...")
+                    input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                    button(class="search-btn") Search
+            div(class="nav-buttons")
+                a(href='/' class='nav') Home
+                a(href='/albums' class='nav') Albums
+                a(href='/about' class='nav') About
+        div(id='right_nav')
             div(class='dropdown')
                 button(class='dropbtn') User's Name
                 div(class='dropdown-content')
                     a(href=`/users/${userId}`) Profile
                     a(href='/settings') Settings
                     a(href='/users/signout') Sign Out
-
+    div(id='header-border')
 
 
 

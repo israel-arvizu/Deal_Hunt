@@ -7,7 +7,7 @@ block content
     form(action="/users/signin" method="post")
         input(type="hidden" class='token' name="_csrf" value=csrfToken)
         label(for="email") Email
-        input(type="password" name="email" required )
+        input(type="text" name="email" required )
         label(for="hashedPassword") Password
         input(type="password" name="hashedPassword" required)
         button(type='submit') Sign In

@@ -22,7 +22,7 @@ module.exports = {
       },
       songList: {
         allowNull: false,
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(1055)
       },
       likeCount: {
         type: Sequelize.INTEGER

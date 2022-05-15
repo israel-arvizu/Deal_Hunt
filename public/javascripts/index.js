@@ -6,7 +6,7 @@ window.addEventListener("load", (event)=>{
 
     demoButton.addEventListener('click', async(e) => {
         e.preventDefault();
-        console.log('in the event listener')
+        // console.log('in the event listener')
 
       const res = await fetch('/users/signin', {
           method: 'GET'

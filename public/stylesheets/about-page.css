@@ -1,0 +1,40 @@
+/* div * {
+    /* font-family: 'DM Sans', sans-serif; ;
+    color: #5F7161; */
+
+#title-about {
+
+    font-size: 42px;
+    color: black;
+    font-weight: bolder;
+    background-color: transparent;
+}
+
+
+.text-about{
+    display: inline-block;
+    text-align: center;
+    background-color:transparent;
+    font-size: 30px;
+    color: black;
+    font-weight: normal;
+}
+
+
+.test {
+    background-image: url("/Music-BackGround.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.back-ground {
+    background-color: transparent;
+}
+
+.about-us-header {
+    display: inline-block;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 60px;
+}

@@ -1,0 +1,67 @@
+.settings-body-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+
+}
+.settings-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 40rem;
+    border: 2px solid #86837f;
+    border-radius: 5px;
+}
+.settings-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 15px;
+
+}
+.settings-name-blocks{
+    margin: 15px;
+    margin-bottom: 9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings-header{
+    margin: 15px;
+}
+
+.settings-form-blocks{
+    background-color: #ebe6e1;
+    border: 1px solid #ebe6e1;
+    border-radius: 5px;
+    margin-right: 15px;
+    margin-left: 5px;
+}
+
+.settings-save.btn{
+    margin-top: 15px;
+}
+
+.settings-save-long.btn{
+    margin-top: 15px;
+    width: 150%;
+}
+
+.input-forms{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#demo-button-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    margin-top: 5px;
+}

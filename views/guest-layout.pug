@@ -4,9 +4,12 @@ html
     block head
         title= title
         link(rel='stylesheet' href='/stylesheets/socials-page.css')
+        link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/settings-form.css')
+        link(rel='stylesheet' href='/stylesheets/profile-page.css')
+        link(rel='stylesheet' href='/stylesheets/search-styling.css')
         link(rel='stylesheet' href='/stylesheets/about-page.css')
         link(rel='stylesheet' href='/stylesheets/album-page.css')
-        link(rel='stylesheet' href='/stylesheets/index.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
         link(rel='stylesheet' href='/stylesheets/home.css')
         link(rel='stylesheet' href='/stylesheets/single-album.css')
@@ -17,7 +20,8 @@ html
     body
         div(class="nav-bar")
             div(id='left_nav')
-                img(src='/favicon.ico' id='logo')
+                a(href='/')
+                    img(src='/Favicon Music_hunt.png' id='logo-layout')
                 div(class="search-bar")
                     form(id="searchbar" action='/search/results' method="post")
                         input(type="search" id="query" name="SearchName" placeholder="Search albums...")

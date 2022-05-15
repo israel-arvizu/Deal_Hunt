@@ -1,7 +1,7 @@
 extends layout.pug
 
 block content
-    h2 All Albums
+    h2(id='all-albums') All Albums
     div(class="album-profile-body")
         body
             table(id='albums-table-page')
@@ -13,7 +13,7 @@ block content
                         th(class='album-head-row') Release Date
                         th(class='album-head-row') Song List
                         th(class='album-head-row') Album Rating
-                        th(class='album-head-row') Add To Favorites
+                        th(class='album-head-row') Fav It!
                 tbody
                      each album in albums
                       tr(class=`albumRow-${album.id}`)
@@ -24,9 +24,9 @@ block content
                           td(class='album-td album-tbl-rows')= album.artist
                           td(class='album-td album-tbl-rows')= album.releaseDate
                           td(class='album-td album-tbl-rows' id='song-name-albums')
-                            ul(class='albums-ul')
-                                each song in album.songList.split("%")
-                                    li #{song}
+                                ol(class='albums-ol')
+                                    each song in album.songList.split("%")
+                                        li(class='albums-ol-li') #{song}
                           td(class='album-td')= album.rating
                           td(class='album-td')
                             button(type='button' class='fave btn' id=`${album.id}`) Add

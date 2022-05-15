@@ -4,16 +4,20 @@ block content
     if errors.length > 0
         each err in errors
             p= err
-    form(action="/users/signup" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        label(for="firstName") First Name
-        input(type="text" name="firstName" required value=user.firstName)
-        label(for="lastName") Last Name
-        input(type="text" name="lastName" required value=user.lastName)
-        label(for="email") Email
-        input(type="text" name="email" required value=user.email)
-        label(for="hashedPassword") Password
-        input(type="password" name="hashedPassword" required)
-        label(for="confirmPassword") Confirm Password
-        input(type="password" name="confirmPassword" required)
-        button(type='submit') Sign Up
+    div(class='settings-body-page')
+        div(class='settings-container')
+            h2(class='settings-header') Sign Up
+            form(action="/users/signup" method="post" class='settings-form')
+                div(class='input-forms')
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    label(for="firstName" class='settings-name-blocks') First Name:
+                        input(type="text" class='settings-form-blocks' name="firstName" required value=user.firstName)
+                    label(for="lastName" class='settings-name-blocks') Last Name:
+                        input(type="text" class='settings-form-blocks' name="lastName" required value=user.lastName)
+                    label(for="email" class='settings-name-blocks') Email:
+                        input(type="text" class='settings-form-blocks' name="email" required value=user.email)
+                    label(for="hashedPassword" class='settings-name-blocks') Password:
+                        input(type="password" class='settings-form-blocks' name="hashedPassword" required)
+                    label(for="confirmPassword" class='settings-name-blocks') Confirm Password:
+                        input(type="password" class='settings-form-blocks' name="confirmPassword" required)
+                button(type='submit' class='settings-save btn') Sign Up

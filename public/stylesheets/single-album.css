@@ -11,6 +11,7 @@
     font-size: 45px;
     color: #636866;
     text-align: center;
+    max-width: 300px;
 }
 
 #single-album-cover {
@@ -55,6 +56,14 @@
 
 #reviews-container {
     max-width: 600px;
+
+}
+
+#reviews-header {
+    color: #636866;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 30px;
 
 }
 
@@ -113,4 +122,15 @@
 #add-review-button {
     margin-top: 20px;
     width: 120px;
+}
+
+.edit-input {
+    background-color: rgba(222, 228, 200, 0.9);
+    border-radius: 20px;
+    padding: 5px;
+    width: 400px;
+}
+
+.edit-submit.btn {
+    margin-left: 5px;
 }

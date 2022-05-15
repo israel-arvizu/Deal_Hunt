@@ -47,10 +47,12 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   if(req.session.auth){
     const { userId } = req.session.auth
+    const loggedInUser = await db.User.findByPk(userId)
     res.render('albums', {
       title: 'Albums',
       albums,
       userId,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
   }else {
@@ -65,9 +67,11 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
   if(req.session.auth){
     const { userId } = req.session.auth
+    const loggedInUser = await db.User.findByPk(userId)
     res.render('about', {
       Title: 'About',
       userId,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
   }
@@ -80,18 +84,12 @@ router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
   const { userId } = req.session.auth;
-  const user = await db.User.findByPk(userId);
-  console.log(user)
-  const {
-    firstName,
-    lastName,
-    // email
-  } = user;
+  const loggedInUser = await db.User.findByPk(userId);
 
   res.render('settings', {
     csrfToken: req.csrfToken(),
     errors: [],
-    user,
+    loggedInUser,
     title: "Settings",
     userId
   })
@@ -143,7 +141,7 @@ router.post('/settings', csrfProtection, updateValidator, asyncHandler(async(req
       lastName,
       // email
     })
-    res.redirect('/settings');
+    res.redirect(`/users/${userId}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('settings', {
@@ -176,12 +174,14 @@ router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(as
     })
   if (req.session.auth) {
     const { userId } = req.session.auth;
+    const loggedInUser = await db.User.findByPk(userId);
     const newReview = db.Review.build();
 
     res.render('album-page', {
       title: `MusicHunt: ${album.name}`,
       album,
       userId,
+      loggedInUser,
       newReview,
       songListArr,
       reviews,
@@ -210,7 +210,6 @@ const newReviewValidator = [
 ]
 
 router.post('/albums/:id(\\d+)', csrfProtection, newReviewValidator, asyncHandler(async(req, res, next) => {
-  console.log("ENTERED POST")
   const albumId = req.params.id;
   const { userId } = req.session.auth;
   const album = await db.Album.findByPk(albumId)
@@ -221,7 +220,7 @@ router.post('/albums/:id(\\d+)', csrfProtection, newReviewValidator, asyncHandle
     },
     order: [['createdAt', 'ASC']]
     })
-if(reviews) {console.log("successful reviews")}
+
   const {
     content
   } = req.body;
@@ -255,15 +254,11 @@ console.log(validatorErrors.isEmpty())
 
 router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
   const {userId} = req.session.auth;
-  console.log('USER ID: ', userId)
   const reviewId = req.params.id;
-  console.log('REVIEW ID: ', reviewId)
   const review = await db.Review.findByPk(reviewId);
-  console.log('REVIEW ', review)
 
   if(userId){
     review.destroy();
-    console.log('Destroyed Review')
     res.json({
       message: 'Destroyed'
     })
@@ -294,12 +289,14 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
 
   if(req.session.auth) {
     const {userId} = req.session.auth;
+    const loggedInUser = await db.User.findByPk(userId);
     res.render('search-results', {
       title: 'search-results',
       errors: [],
       csrfToken: req.csrfToken(),
       searchFilters,
-      userId
+      userId,
+      loggedInUser
     })
   } else {
     res.render('guest-search-results', {

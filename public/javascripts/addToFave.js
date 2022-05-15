@@ -18,6 +18,7 @@ faveButtonArray.forEach(button => {
 
         if(data.message === 'Added'){
             alert('Worked');
+            button.classList.add('hidden')
         }else{
             alert('Failed');
         }

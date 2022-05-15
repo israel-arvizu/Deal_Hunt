@@ -3,6 +3,7 @@ html
     head
     block head
         title= title
+        link(rel='stylesheet' href='/stylesheets/about-page.css')
         link(rel='stylesheet' href='/stylesheets/album-page.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
@@ -19,7 +20,7 @@ html
                     form(id="searchbar" action='/search/results' method="post")
                         input(type="search" id="query" name="SearchName" placeholder="Search albums...")
                         input(type="hidden" class='token' name="_csrf" value=csrfToken)
-                        button(class="search btn") Search
+                        button(class="search-btn") Search
                 div(class="nav-buttons")
                     a(href='/' class='nav') Home
                     a(href='/albums' class='nav') Albums

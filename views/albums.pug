@@ -2,11 +2,12 @@ extends layout.pug
 
 block content
     h2 All Albums
-    div(class="profile-body")
+    div(class="album-profile-body")
         body
-            table
+            table(id='albums-table-page')
                 thead
                     tr
+                        th(class='album-head-row')
                         th(class='album-head-row') Album
                         th(class='album-head-row') Artist
                         th(class='album-head-row') Release Date
@@ -16,16 +17,16 @@ block content
                 tbody
                      each album in albums
                       tr(class=`albumRow-${album.id}`)
-                          td
+                          td(class='album-td')
                             a(href=`/albums/${album.id}` class='home-album-link')
-                              img(src= album.url)
-                          td(class='album-tbl-rows' id='album-Name')= album.name
-                          td(class='album-tbl-rows')= album.artist
-                          td(class='album-tbl-rows')= album.releaseDate
-                          td(class='album-tbl-rows' id='song-name')
-                            ul
+                              img(src= album.url class="album")
+                          td(class='album-td album-tbl-rows' id='album-Name')= album.name
+                          td(class='album-td album-tbl-rows')= album.artist
+                          td(class='album-td album-tbl-rows')= album.releaseDate
+                          td(class='album-td album-tbl-rows' id='song-name-albums')
+                            ul(class='albums-ul')
                                 each song in album.songList.split("%")
                                     li #{song}
-                          td= album.rating
-                          td
+                          td(class='album-td')= album.rating
+                          td(class='album-td')
                             button(type='button' class='fave btn' id=`${album.id}`) Add

@@ -20,7 +20,8 @@ html
   body
     div(class="nav-bar")
         div(id='left_nav')
-            img(src='/Favicon Music_hunt.png' id='logo-layout')
+            a(href='/')
+                img(src='/Favicon Music_hunt.png' id='logo-layout')
             div(class="search-bar")
                 form(id="searchbar" action='/search/results' method="post")
                     input(type="search" id="query" name="SearchName" placeholder="Search albums...")
@@ -32,11 +33,14 @@ html
                 a(href='/about' class='nav') About
         div(id='right_nav')
             div(class='dropdown')
-                button(class='dropbtn') #{loggedInUser.firstName}
+                button(class='dropbtn') #{loggedInUser.firstName} #{loggedInUser.lastName}
                 div(class='dropdown-content')
                     a(href=`/users/${userId}`) Profile
                     a(href='/settings') Settings
                     a(href='/users/signout') Sign Out
+            div(id='right-layout-logo')
+                h2(id='music-hunt-logo') Music Hunt
+                img(src='/Favicon Music_hunt.png' id='img-logo-right')
     div(id='header-border')
 
 

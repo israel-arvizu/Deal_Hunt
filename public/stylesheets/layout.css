@@ -11,6 +11,7 @@ body {
    align-items: center;
    justify-content:space-between;
    margin: 20px 60px;
+   margin-right: 30px;
 
 }
 
@@ -52,6 +53,11 @@ body {
     border: none;
 }
 
+.search-bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 .search-btn {
     height: 30px;
@@ -76,6 +82,8 @@ body {
     padding: 0px;
     font-size: 18px;
     border: none;
+    margin: 10px;
+    margin-right: 25px;
   }
 
   .dropdown {
@@ -134,5 +142,26 @@ body {
 
 #logo-layout{
   max-width: 60px;
+
+}
+
+#right_nav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#right-layout-logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#music-hunt-logo{
+  margin: 10px;
+  margin-right: 5px;
+}
+
+#img-logo-right{
+  width: 30px;
 
 }

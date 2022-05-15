@@ -196,6 +196,8 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   if(userId === parseInt(requestedUser)){
     const user = await db.User.findByPk(userId);
 
+    console.log(loggedInUser);
+
     res.render('profile-page', {
       title: `${user.firstName}'s Page`,
       favListQuery,

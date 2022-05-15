@@ -180,12 +180,14 @@ router.get('/albums/:id(\\d+)', csrfProtection, updateValidator, asyncHandler(as
     })
   if (req.session.auth) {
     const { userId } = req.session.auth;
+    const loggedInUser = await db.User.findByPk(userId);
     const newReview = db.Review.build();
 
     res.render('album-page', {
       title: `MusicHunt: ${album.name}`,
       album,
       userId,
+      loggedInUser,
       newReview,
       songListArr,
       reviews,
@@ -298,12 +300,14 @@ router.post("/search/results", csrfProtection, asyncHandler(async(req,res,next) 
 
   if(req.session.auth) {
     const {userId} = req.session.auth;
+    const loggedInUser = await db.User.findByPk(userId);
     res.render('search-results', {
       title: 'search-results',
       errors: [],
       csrfToken: req.csrfToken(),
       searchFilters,
-      userId
+      userId,
+      loggedInUser
     })
   } else {
     res.render('guest-search-results', {

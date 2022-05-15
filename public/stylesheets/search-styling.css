@@ -25,8 +25,14 @@
 .image-search-result{
     width: 150px;
     border-radius: 5px;
+    transition: box-shadow 0.2s;
+    transition: width 0.2s;
 }
 
+.image-search-result:hover{
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width: 160px;
+}
 .list-item{
     list-style: none;
 }

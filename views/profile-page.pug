@@ -30,7 +30,7 @@ block content
                                 each album in favListQuery
                                         tr(id=`container-${album.albumId}` class="rows")
                                             td(class='home-table-section')
-                                                a(href=`/albums/${album.id}`)
+                                                a(href=`/albums/${album.albumId}`)
                                                     img(src= album.url class='album-image')
                                             td(class='home-table-section')= album.name
                                             td(class='home-table-section')= album.artist

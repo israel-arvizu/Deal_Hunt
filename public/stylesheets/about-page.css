@@ -2,39 +2,41 @@
     /* font-family: 'DM Sans', sans-serif; ;
     color: #5F7161; */
 
-
-
-
-
-
-
 h1 {
 
     font-size: 42px;
     color: black;
     font-weight: bolder;
+    background-color: transparent;
 }
 
-.back-ground{
-    background-image: url("/Music_Hunt_Logo.png");
-    background-repeat: no-repeat;
-    background-position-x: right;
-    background-position-y: top;
-
-
-}
-.back-ground:before {
-    position: absolute;
-    content: '';
-    z-index: -1;
-    width: 200px;
-    height: 50px;
-    background-image: url("/Music_Hunt_Logo.png");
-}
 
 h2,
 p ,
 a  {
+    display: inline-block;
+    text-align: center;
     background-color:transparent;
     font-size: 30px;
+    color: black;
+    font-weight: normal;
+}
+
+
+.test {
+    background-image: url("/Music-BackGround.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+div {
+    background-color: transparent;
+}
+
+.about-us-header {
+    display: inline-block;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-size: 60px;
 }

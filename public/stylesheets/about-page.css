@@ -1,13 +1,12 @@
-* {
-    font-family: 'DM Sans', sans-serif; ;
-    color: #5F7161;
-    font-weight: bolder;
+/* div * {
+    /* font-family: 'DM Sans', sans-serif; ;
+    color: #5F7161; */
 
 
-    /* background-repeat:no-repeat;
-    background-position: center center;
-    background-size: cover; */
-}
+
+
+
+
 
 h1 {
 
@@ -17,12 +16,20 @@ h1 {
 }
 
 .back-ground{
-    background-image: url("/pngwing.com.png");
+    background-image: url("/Music_Hunt_Logo.png");
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: top;
 
 
+}
+.back-ground:before {
+    position: absolute;
+    content: '';
+    z-index: -1;
+    width: 200px;
+    height: 50px;
+    background-image: url("/Music_Hunt_Logo.png");
 }
 
 h2,

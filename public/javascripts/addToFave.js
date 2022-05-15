@@ -17,8 +17,9 @@ faveButtonArray.forEach(button => {
         const data = await res.json();
 
         if(data.message === 'Added'){
-            alert('Worked');
-            button.classList.add('hidden')
+            button.innerHTML = 'Added!'
+            button.disabled = true;
+            button.classList.add('hidadd')
         }else{
             alert('Failed');
         }
@@ -43,7 +44,6 @@ removeFaveArray.forEach(button => {
         }else{
             alert('Failed');
         }
-        alert('Removed Successfully');
     })
 })
 })

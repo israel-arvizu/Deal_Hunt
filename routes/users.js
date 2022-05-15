@@ -85,7 +85,6 @@ router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, 
         hashedPassword
     } = req.body
     const hashPass = await generatePass(hashedPassword)
-    // console.log(hashPass)
 
     const user = db.User.build({
         firstName,
@@ -196,8 +195,6 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   if(userId === parseInt(requestedUser)){
     const user = await db.User.findByPk(userId);
 
-    console.log(loggedInUser);
-
     res.render('profile-page', {
       title: `${user.firstName}'s Page`,
       favListQuery,
@@ -243,7 +240,6 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
 }))
 
 router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
-  console.log('Entered Route')
   const {userId} = req.session.auth;
   const albumId = req.params.id;
   const list = await db.FavoriteList.findOne({where: {
@@ -275,9 +271,8 @@ router.post(
         email: 'karmaissniping@dmxs8.com'
       }
     });
-    console.log(user)
+
     signinUser(req, res, user);
-    console.log(req.session.auth)
     res.redirect('/')
   })
 );

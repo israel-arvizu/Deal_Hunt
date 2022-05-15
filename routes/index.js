@@ -85,12 +85,6 @@ router.get('/about',csrfProtection, asyncHandler(async(req, res) => {
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {
   const { userId } = req.session.auth;
   const loggedInUser = await db.User.findByPk(userId);
-  console.log(loggedInUser)
-  // const {
-  //   firstName,
-  //   lastName,
-  //   // email
-  // } = loggedInUser;
 
   res.render('settings', {
     csrfToken: req.csrfToken(),
@@ -147,7 +141,7 @@ router.post('/settings', csrfProtection, updateValidator, asyncHandler(async(req
       lastName,
       // email
     })
-    res.redirect('/settings');
+    res.redirect(`/users/${userId}`);
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('settings', {
@@ -216,7 +210,6 @@ const newReviewValidator = [
 ]
 
 router.post('/albums/:id(\\d+)', csrfProtection, newReviewValidator, asyncHandler(async(req, res, next) => {
-  console.log("ENTERED POST")
   const albumId = req.params.id;
   const { userId } = req.session.auth;
   const album = await db.Album.findByPk(albumId)
@@ -227,7 +220,7 @@ router.post('/albums/:id(\\d+)', csrfProtection, newReviewValidator, asyncHandle
     },
     order: [['createdAt', 'ASC']]
     })
-if(reviews) {console.log("successful reviews")}
+
   const {
     content
   } = req.body;
@@ -261,15 +254,11 @@ console.log(validatorErrors.isEmpty())
 
 router.put('/reviews/remove/:id(\\d+)', asyncHandler(async(req, res) => {
   const {userId} = req.session.auth;
-  console.log('USER ID: ', userId)
   const reviewId = req.params.id;
-  console.log('REVIEW ID: ', reviewId)
   const review = await db.Review.findByPk(reviewId);
-  console.log('REVIEW ', review)
 
   if(userId){
     review.destroy();
-    console.log('Destroyed Review')
     res.json({
       message: 'Destroyed'
     })

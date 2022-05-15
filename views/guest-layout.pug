@@ -3,25 +3,32 @@ html
     head
     block head
         title= title
+        link(rel='stylesheet' href='/stylesheets/about-page.css')
+        link(rel='stylesheet' href='/stylesheets/album-page.css')
         link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/layout.css')
+        link(rel='stylesheet' href='/stylesheets/home.css')
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,500&family=PT+Sans&family=Varela+Round&display=swap" rel="stylesheet")
         script(src='/javascripts/index.js' type='module')
     body
-        div(class='guest-navbar')
-            h1 Welcome to Music Hunt!
-            div(class="nav-bar")
-                div(class="logo")
+        div(class="nav-bar")
+            div(id='left_nav')
+                img(src='/favicon.ico' id='logo')
                 div(class="search-bar")
-            form(id="searchbar" action='/search/results' method="post")
-                input(type="search" id="query" name="SearchName" placeholder="Albums")
-                input(type="hidden" class='token' name="_csrf" value=csrfToken)
-                button Search
+                    form(id="searchbar" action='/search/results' method="post")
+                        input(type="search" id="query" name="SearchName" placeholder="Search albums...")
+                        input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                        button(class="search-btn") Search
                 div(class="nav-buttons")
-                    a(href='/') Home
-                    a(href='/albums') Albums
-                    a(href='/about') About
-            div
+                    a(href='/' class='nav') Home
+                    a(href='/albums' class='nav') Albums
+                    a(href='/about' class='nav') About
+            div(class='right_nav')
                 a(href='/users/signin')
-                    input(type='button' class='signin btn' value='Sign In')
+                    input(type='button' class='sign-btn' value='Sign In')
                 a(href='/users/signup')
-                    input(type='button' class='signup btn' value='Sign Up')
+                    input(type='button' class='sign-btn' value='Sign Up')
+        div(id='header-border')
     block content

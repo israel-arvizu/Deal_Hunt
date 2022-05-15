@@ -1,0 +1,157 @@
+body{
+    font-family: 'DM Sans', sans-serif;
+    background-color: #f9f3e1;
+    margin: 0px
+}
+
+#favList-break{
+    width: 97%;
+    border: 1px solid rgb(149, 150, 147)
+
+}
+
+.headline-fav{
+    margin: 0px;
+    margin-bottom: 15px;
+    margin-left: 170px;
+
+}
+
+.profile-bar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20%;
+
+}
+
+.profile-name{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 800;
+    font-size: 35px;
+}
+.profile-info{
+    padding-left: 2em;
+}
+.profile-bar{
+    background-color: rgb(109, 139, 116);
+    height: 250px;
+    border-top: 15px solid #5F7161;
+    border-bottom: 15px solid #5F7161;;
+}
+
+.profile-sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-image{
+    max-width: 200px;
+    min-width: 50px;
+    border-radius: 100px;
+    border: 5px solid white;
+}
+
+.profile-bottom-body{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.profile-body{
+    background-color: #f9f3e1;
+}
+.home-table-section{
+    padding: 20px;
+}
+
+.album-image{
+    max-width: 150px;
+    min-width: 50px;
+    max-height: 150px;
+    border-radius: 40px;
+}
+.profile-table#album-tab{
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+
+}
+
+.rows{
+    justify-content: center;
+}
+
+#sidelist-break{
+    border-left: 3px solid rgb(149, 150, 147);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.btn{
+    background-color: #6D8B74;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    transition: background-color 0.1s;
+    border-radius: 5px;
+}
+.profile-edit.btn{
+    background-color: #f9f3e1;
+    border: none;
+    padding: 10px 15px;
+    color:rgb(109, 139, 116);
+    transition: background-color 0.1s;
+    border-radius: 5px;
+}
+
+.profile-edit.btn:hover{
+    background-color: #adb8ab;
+    border: none;
+    padding: 10px 15px;
+    color:rgb(255, 255, 255);
+    transition: background-color 0.1s;
+    border-radius: 5px;
+}
+.info-date-text{
+    border: #5F7161 solid 1px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: aliceblue;
+    color: #6D8B74;
+    font-style: italic;
+}
+
+#stories-indv{
+    margin-top: 10px;
+}
+
+#thanking-line{
+    font-style: italic;
+}
+
+#news-pic-lamar{
+    max-width: 300px;
+    min-width: 100px;
+    border: #5F7161 solid 1px;
+    border-radius: 15px;
+}
+
+#story-section-text{
+    margin: 1px;
+    font-style: italic;
+    color: rgb(104, 104, 104);
+}
+
+#news-caption{
+    font-style: italic;
+    margin-bottom: 2px;
+}
+#news-line-break{
+    border: 1px solid rgb(127, 128, 127);
+}
+
+#about-link-home{
+    color: #5F7161;
+}

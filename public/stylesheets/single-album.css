@@ -8,9 +8,9 @@
 }
 
 #album_title {
-font-size: 45px;
-color: #636866;
-text-align: center;
+    font-size: 45px;
+    color: #636866;
+    text-align: center;
 }
 
 #single-album-cover {
@@ -54,15 +54,63 @@ text-align: center;
 }
 
 #reviews-container {
-    max-width: 500px;
-    background-color: #023f72;
-	padding: 15px;
-	border-radius: 3px;
+    max-width: 600px;
+
 }
 
+#review-list {
+    padding: 0;
+}
 
 .single-review {
     list-style: none;
-    background: rgba(250, 250, 250, .9) !important;
-	border: none !important;
+    background: rgba(250, 250, 250, .9);
+    margin-bottom: 30px;
+    border-radius: 40px;
+    padding: 20px;
+}
+
+#reviewer-name {
+    color: #636866;
+    margin: 0;
+}
+
+#review-content {
+    color: #636866;
+}
+
+#review-date {
+    color: #636866;
+    font-size: 10px;
+}
+
+#s-album-review-divider {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+#leave-review {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-review {
+    color: #636866;
+}
+
+#newReview {
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+#new-review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-review-button {
+    margin-top: 20px;
+    width: 120px;
 }

@@ -19,21 +19,22 @@ block content
             ul(id='review-list')
                 each review in reviews
                     li(class='single-review' id=`container-${review.id}`)
-                        span #{review.User.firstName} #{review.User.lastName}
-                        p #{review.content}
-                        span #{review.createdAt}
+                        p(id='reviewer-name') #{review.User.firstName} #{review.User.lastName}
+                        p(id='review-date') #{review.createdAt}
+                        p(id='review-content') #{review.content}
                         if review.userId === userId
                             button(type='button' class='edit-review btn' id=`${review.id}`) Edit
                             button(type='button' class='delete-review btn' id=`${review.id}`) Delete
                             form(class='hidden' id=`edit-form-${review.id}`)
                                 input(type='text', name='content' value= review.content id=`${review.id}-edit-content`)
                                 button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
+            hr(id='s-album-review-divider')
             div(id='leave-review')
-                h2 Leave a Review
-                form(action=`/albums/${album.id}` method='post')
+                h2(id='add-review') Leave a Review
+                form(action=`/albums/${album.id}` method='post' id='new-review-form')
                     input(type="hidden" class='token' name="_csrf" value=csrfToken)
                     textarea(type="text" id="newReview" name="content" value=newReview.content placeholder="Your review..." required )
-                    button(type='submit') Post Review
+                    button(type='submit' id="add-review-button" class='btn') Post Review
         if errors.length > 0
             each err in errors
                 p= err

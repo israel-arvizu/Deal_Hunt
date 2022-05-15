@@ -30,7 +30,7 @@ block content
                                 button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
             hr(id='s-album-review-divider')
             div(id='leave-review')
-                h2(id='add-review') Leave a Review
+                h2(class='add-review') Leave a Review
                 form(action=`/albums/${album.id}` method='post' id='new-review-form')
                     input(type="hidden" class='token' name="_csrf" value=csrfToken)
                     textarea(type="text" id="newReview" name="content" value=newReview.content placeholder="Your review..." required )

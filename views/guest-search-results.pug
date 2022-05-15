@@ -2,6 +2,10 @@ extends guest-layout.pug
 block content
     h1 Results
     div(name='Results List')
-        ul
-            each result in searchFilters
-                li #{result.name}, #{result.artist}
+    ul
+        each album in searchFilters
+                li
+                    a(href=`/albums/${album.id}` class='home-album-link')
+                        div(class=`result-container-${album.id}`)
+                            img(src= album.url)
+                            p #{album.name} - #{album.artist} - #{album.releaseDate}

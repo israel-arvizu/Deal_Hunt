@@ -7,22 +7,23 @@ block content
             table
                 thead
                     tr
-                        th Album
-                        th Artist
-                        th Release Date
-                        th Song List
-                        th Add To Favorites
+                        th(class='album-head-row') Album
+                        th(class='album-head-row') Artist
+                        th(class='album-head-row') Release Date
+                        th(class='album-head-row') Song List
+                        th(class='album-head-row') Album Rating
+                        th(class='album-head-row') Add To Favorites
                 tbody
                      each album in albums
                       tr(class=`albumRow-${album.id}`)
                           td
                             a(href=`/albums/${album.id}` class='home-album-link')
                               img(src= album.url)
-                          td= album.name
-                          td= album.artist
-                          td= album.releaseDate
-                          td
-                            ol
+                          td(class='album-tbl-rows' id='album-Name')= album.name
+                          td(class='album-tbl-rows')= album.artist
+                          td(class='album-tbl-rows')= album.releaseDate
+                          td(class='album-tbl-rows' id='song-name')
+                            ul
                                 each song in album.songList.split("%")
                                     li #{song}
                           td= album.rating

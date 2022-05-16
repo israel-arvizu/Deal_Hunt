@@ -169,9 +169,8 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         errors,
         csrfToken: req.csrfToken()
     })
-  }
 
-}))
+  }))
 
 router.get('/signout', csrfProtection, asyncHandler(async(req, res) => {
   signoutUser(req, res);

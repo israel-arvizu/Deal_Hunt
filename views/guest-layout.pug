@@ -32,11 +32,14 @@ html
                     a(href='/' class='nav') Home
                     a(href='/albums' class='nav') Albums
                     a(href='/about' class='nav') About
-            div(class='right_nav')
+            div(id='right_nav')
                 a(href='/users/signin')
                     input(type='button' class='sign-btn' value='Sign In')
                 a(href='/users/signup')
                     input(type='button' class='sign-btn' value='Sign Up')
+                div(id='right-layout-logo')
+                    h2(id='music-hunt-logo') Music Hunt
+                    img(src='/Favicon Music_hunt.png' id='img-logo-right')
         div(id='header-border')
         block content
         footer

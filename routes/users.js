@@ -225,7 +225,6 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
         albumId: +req.params.id
     })
 
-    console.log(addedAlbum);
     await addedAlbum.save();
 
     res.json({

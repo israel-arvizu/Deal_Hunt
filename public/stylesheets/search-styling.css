@@ -4,7 +4,9 @@
 }
 #results-top{
     margin: 8px;
+    color: #636866
 }
+
 #top-banner-head{
     margin-top: 5px;
     padding: 3px;
@@ -16,7 +18,7 @@
 .album-title-search{
     margin: 2px;
     font-size: 100%;
-    color: #5F7161;
+    color: #3f463d;
 }
 .result-list{
     display: flex;

@@ -280,9 +280,11 @@ router.post(
 router.get('/socials', csrfProtection, asyncHandler(async(req,res) => {
   if (req.session.auth) {
     const {userId} = req.session.auth;
+    const loggedInUser = await db.User.findByPk(userId);
     res.render('socials', {
       title: 'Socials',
       userId,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
 

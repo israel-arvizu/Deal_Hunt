@@ -25,7 +25,8 @@ block content
                       td(class='tbl-rows')= album.releaseDate
                       td(class='tbl-rows')= album.rating
                       td(class='tbl-rows')
-                        button(type='button' class='fave btn' id=`${album.id}`) Add
+                        a(href='/users/signin')
+                            button(type='button' class='btn') Add
         div(id="vertical-separator")
         div(id="side-list")
             div(id='news')

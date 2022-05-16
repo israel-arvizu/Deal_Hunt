@@ -153,8 +153,9 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
 
         if (checkedVar) {
 
-          console.log(signinUser(req, res, user));
-          res.send('LOGIN SUCESS!')
+          const userId = signinUser(req, res, user);
+          console.log('USER ID', userId);
+          res.redirect('/');
         }
 
         errors.push("Failed Login")
@@ -164,14 +165,15 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
 
     }else{
       errors = validatorErrors.array().map((error) => error.msg);
-    }
-
-    res.render('signin', {
+      res.render('signin', {
         title:"Sign In",
         email,
         errors,
         csrfToken: req.csrfToken()
     })
+
+    }
+
 }))
 
 router.get('/signout', csrfProtection, asyncHandler(async(req, res) => {

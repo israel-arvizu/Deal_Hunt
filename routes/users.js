@@ -152,8 +152,9 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
 
         if (checkedVar) {
-          signinUser(req, res, user);
-          res.redirect('/')
+
+          console.log(signinUser(req, res, user));
+          res.send('LOGIN SUCESS!')
         }
 
         errors.push("Failed Login")

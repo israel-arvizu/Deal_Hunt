@@ -15,11 +15,11 @@ Discover new albums here: https://musichunt-app.herokuapp.com/
 
 <img src='../Music_Hunt/public/SS.jpg'>
 
-<img src='../Music_Hunt/public/ScreenShot2.png'>
+<img src='../Music_Hunt/public/ScreenShot2.jpg'>
 
-<img src='../Music_Hunt/public/ScreenShot3.png'>
+<img src='../Music_Hunt/public/ScreenShot3.jpg'>
 
-<img src='../Music_Hunt/public/ScreenShot4.png'>
+<img src='../Music_Hunt/public/ScreenShot4.jpg'>
 
 
 

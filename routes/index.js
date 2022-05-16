@@ -65,9 +65,11 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 }));
 
 router.get('/about', csrfProtection, asyncHandler(async(req, res) => {
+  console.log('ENTERED ABOUT')
   if(req.session.auth){
     const { userId } = req.session.auth
     const loggedInUser = await db.User.findByPk(userId)
+    console.log(loggedInUser);
     res.render('about', {
       Title: 'About',
       userId,

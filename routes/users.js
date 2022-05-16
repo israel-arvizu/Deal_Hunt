@@ -164,13 +164,13 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     }
 
       errors = validatorErrors.array().map((error) => error.msg);
-      res.render('signin', {
-        title:"Sign In",
-        email,
-        errors,
-        csrfToken: req.csrfToken()
-    })
-
+    //   res.render('signin', {
+    //     title:"Sign In",
+    //     email,
+    //     errors,
+    //     csrfToken: req.csrfToken()
+    // })
+    res.send('Login ERORR --------->')
 
 }))
 

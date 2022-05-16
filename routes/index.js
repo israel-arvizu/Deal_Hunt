@@ -43,7 +43,6 @@ router.get('/',csrfProtection, asyncHandler(async(req, res, next)=> {
 router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 
   const albums = await db.Album.findAll();
-  console.log(albums.forEach(album => {console.log(album.name)}))
 
   if(req.session.auth){
     const { userId } = req.session.auth
@@ -65,23 +64,23 @@ router.get('/albums', csrfProtection,  asyncHandler(async (req, res) =>{
 }));
 
 router.get('/about', csrfProtection, asyncHandler(async(req, res) => {
-  console.log('ENTERED ABOUT')
   if(req.session.auth){
     const { userId } = req.session.auth
     const loggedInUser = await db.User.findByPk(userId)
-    console.log(loggedInUser);
+
     res.render('about', {
+        Title: 'About',
+        userId,
+        loggedInUser,
+        csrfToken: req.csrfToken()
+      })
+  }else{
+    res.render('guest-about', {
       Title: 'About',
-      userId,
-      loggedInUser,
       csrfToken: req.csrfToken()
     })
   }
 
-  res.render('guest-about', {
-    Title: 'About',
-    csrfToken: req.csrfToken()
-  })
 }));
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {

@@ -148,23 +148,29 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
       if (user) {
         const userPass = user.hashedPassword
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
-        if (checkedVar) {
+
+        if(checkedVar) {
           signinUser(req, res, user);
-          res.redirect('/')
+          res.redirect('/');
         }
         errors.push("Failed Login")
-      }else
-      errors.push("Failed Login")
-    }else
+
+      }else{
+        errors.push("No User Found")
+      }
+
+    }
+
       errors = validatorErrors.array().map((error) => error.msg);
 
-    res.render('signin', {
+      res.render('signin', {
         title:"Sign In",
         email,
         errors,
         csrfToken: req.csrfToken()
     })
-}))
+
+  }))
 
 router.get('/signout', csrfProtection, asyncHandler(async(req, res) => {
   signoutUser(req, res);
@@ -250,7 +256,6 @@ router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
 
   if(userId){
     list.destroy();
-    console.log('Destroyed Album')
     res.json({
       message: 'Destroyed'
     })

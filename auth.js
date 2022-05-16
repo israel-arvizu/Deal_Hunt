@@ -1,7 +1,7 @@
 const db = require('./db/models');
 
 const signinUser = (req, res, user) => {
-    req.session.auth = {userId: user.id}
+    req.session.auth = {userId: user.id};
 }
 const signoutUser = (req, res) => {
     delete req.session.auth;

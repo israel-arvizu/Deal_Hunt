@@ -144,19 +144,26 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
       const user = await db.User.findOne({
           where: { email }
       })
+      console.log('LOOKING FOR USER')
 
       if (user) {
+        console.log('FOUND USER', user);
         const userPass = user.hashedPassword
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
+
         if (checkedVar) {
           signinUser(req, res, user);
           res.redirect('/')
         }
+
         errors.push("Failed Login")
-      }else
-      errors.push("Failed Login")
-    }else
+      }else{
+        errors.push("No User Found")
+      }
+
+    }else{
       errors = validatorErrors.array().map((error) => error.msg);
+    }
 
     res.render('signin', {
         title:"Sign In",

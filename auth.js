@@ -42,4 +42,4 @@ const restoreUser = async (req, res, next) => {
     }
 }
 
-module.exports = { signinUser, signoutUser, requireAuth, restoreUser}
+module.exports = { signinUser, signoutUser, requireAuth, restoreUser, userSignIn}

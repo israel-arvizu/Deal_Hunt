@@ -4,7 +4,7 @@ const { check, validationResult} = require('express-validator');
 const db = require('../db/models');
 const { checkPassword, generatePass} = require('./bcrypt')
 const bcrypt = require('bcryptjs')
-const { signinUser, signoutUser, requireAuth, restoreUser} = require('../auth');
+const { signinUser, signoutUser, requireAuth, restoreUser, userSignIn} = require('../auth');
 const { sequelize } = require('../db/models');
 const { Op } = require("sequelize");
 
@@ -150,7 +150,7 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
 
         if(checkedVar) {
-          signinUser(req, res, user);
+          userSignIn(req, res, user);
           res.redirect('/');
         }
         errors.push("Failed Login")

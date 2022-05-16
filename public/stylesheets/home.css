@@ -21,7 +21,12 @@
     margin-left: 60px;
 }
 
+.home-img{
+    border: 1px white solid;
+}
 .album {
+    /* border: 5px white solid; */
+    border-radius: 15px;
     width: 150px;
     height: auto;
     transition: box-shadow 0.2s;
@@ -69,6 +74,8 @@
 .news_img {
     width: 300px;
     height: auto;
+    border: 2px rgb(156, 156, 156) solid;
+    border-radius: 2px;
 }
 
 #side-list {

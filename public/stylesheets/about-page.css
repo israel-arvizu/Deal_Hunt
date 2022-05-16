@@ -20,13 +20,6 @@
     font-weight: normal;
 }
 
-
-.test {
-    background-image: url("/Music-BackGround.jpg");
-    background-repeat: no-repeat;
-    background-size:cover;
-}
-
 .back-ground {
     background-color: transparent;
 }

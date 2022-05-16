@@ -167,16 +167,16 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
           const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
 
           console.log('THIS IS IT---------->', loggedInUser);
-          res.render('home-logged-in',{
-            title: 'Home',
-            albums,
-            userId ,
-            loggedInUser,
-            songs,
-            favListQuery,
-            csrfToken: req.csrfToken()
-        })
-
+        //   res.render('home-logged-in',{
+        //     title: 'Home',
+        //     albums,
+        //     userId ,
+        //     loggedInUser,
+        //     songs,
+        //     favListQuery,
+        //     csrfToken: req.csrfToken()
+        // })
+          res.redirect('/');
         errors.push("Failed Login")
 
       }else{

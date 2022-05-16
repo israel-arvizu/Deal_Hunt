@@ -1,30 +1,37 @@
 extends guest-layout.pug
 block content
-    block content
-    h1 #{album.name}
-    img(src= album.url)
-    h3 by #{album.artist}
-    h4 Release Date: #{album.releaseDate}
+    div(id='single-album-page')
+        div(id='single-album')
+            h1(id='album_title') #{album.name}
+            img(src= album.url id='single-album-cover')
+            h3(id='s-album-page-artist') by #{album.artist}
+            h4(id='s-album-page-release-date') Release Date: #{album.releaseDate}
 
-    div(id='song-list')
-        h2 Song List
-        ol
-            each song in songListArr
-                li #{song}
-
-    div(id='reviews-container')
-        h2 Reviews
-        ul
-            each review in reviews
-                li
-                    p #{review.content}
-                    span #{review.createdAt}
-                if review.userId === userId
-                    button(type='button' class='edit-review btn' id=`${review.id}`) Edit
-                    button(type='button' class='delete-review btn' id=`${review.id}`) Delete
-        div(id='leave-review')
-            h2 Sign In or Create An Account to leave a Review!
-            a(href='/users/signin')
-                button(type='button' class='review-signin') Sign In
-            a(href='/users/signup')
-                button(type='button' class='review-signup') Create Account
+            hr(id='s-album-songs-divider')
+            div(id='s-album-song-list')
+                h2(id='s-album-songs') Song List
+                ol
+                    each song in songListArr
+                        li #{song}
+        div(id="s-album-page-vertical-separator")
+        div(id='reviews-container')
+            h2(id='reviews-header') Reviews
+            ul(id='review-list')
+                each review in reviews
+                    li(class='single-review' id=`container-${review.id}`)
+                        p(id='reviewer-name') #{review.User.firstName} #{review.User.lastName}
+                        p(id='review-date') #{review.createdAt}
+                        p(id='review-content') #{review.content}
+                        if review.userId === userId
+                            button(type='button' class='edit-review btn' id=`${review.id}`) Edit
+                            button(type='button' class='delete-review btn' id=`${review.id}`) Delete
+                            form(class='hidden' id=`edit-form-${review.id}`)
+                                input(type='text', name='content' value= review.content id=`${review.id}-edit-content`)
+                                button(class="edit-submit" id=`edit-submit-${review.id}`) Submit
+            hr(id='s-album-review-divider')
+            div(id='leave-review')
+                h2(class='add-review') Sign In or Create An Account to leave a Review!
+                a(href='/users/signin')
+                    button(type='button' class='review-signin btn') Sign In
+                a(href='/users/signup')
+                    button(type='button' class='review-signup btn') Create Account

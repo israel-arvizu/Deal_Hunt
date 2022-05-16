@@ -85,7 +85,6 @@ router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, 
         hashedPassword
     } = req.body
     const hashPass = await generatePass(hashedPassword)
-    // console.log(hashPass)
 
     const user = db.User.build({
         firstName,
@@ -189,7 +188,7 @@ router.get('/:id(\\d+)/favoritelist',csrfProtection,  asyncHandler(async(req, re
 router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
   const requestedUser = req.params.id;
   const { userId } = req.session.auth;
-  const currUser = await db.User.findByPk(userId);
+  const loggedInUser = await db.User.findByPk(userId);
   const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${requestedUser})`)
 
 
@@ -200,7 +199,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async(req, res, next)=>{
       title: `${user.firstName}'s Page`,
       favListQuery,
       userId,
-      currUser,
+      loggedInUser,
       csrfToken: req.csrfToken()
     })
 
@@ -241,7 +240,6 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
 }))
 
 router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
-  console.log('Entered Route')
   const {userId} = req.session.auth;
   const albumId = req.params.id;
   const list = await db.FavoriteList.findOne({where: {
@@ -273,12 +271,30 @@ router.post(
         email: 'karmaissniping@dmxs8.com'
       }
     });
-    console.log(user)
+
     signinUser(req, res, user);
-    console.log(req.session.auth)
     res.redirect('/')
   })
 );
+
+router.get('/socials', csrfProtection, asyncHandler(async(req,res) => {
+  if (req.session.auth) {
+    const {userId} = req.session.auth;
+    res.render('socials', {
+      title: 'Socials',
+      userId,
+      csrfToken: req.csrfToken()
+    })
+
+  } else {
+
+    res.render('guest-socials', {
+      title: 'Guest-Socials',
+
+      csrfToken: req.csrfToken()
+    })
+  }
+}))
 
 
 module.exports = router;

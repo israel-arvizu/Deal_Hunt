@@ -1,0 +1,136 @@
+#single-album-page {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#single-album {
+    justify-content: center;
+}
+
+#album_title {
+    font-size: 45px;
+    color: #636866;
+    text-align: center;
+    max-width: 300px;
+}
+
+#single-album-cover {
+    width: 300px;
+    border-radius: 40px;
+}
+
+#s-album-page-artist {
+    font-size: 20px;
+    color: #636866;
+}
+
+#s-album-page-release-date {
+    font-size: 12px;
+    color: #636866;
+}
+
+#s-album-songs-divider {
+    color: #c4c5be;
+    margin: 30px 0;
+    width: 300px;
+}
+
+#s-album-songs {
+    text-align: center;
+    color: #636866;
+}
+
+#s-album-song-list {
+    color: #636866;
+    text-align: left;
+}
+
+#s-album-page-vertical-separator {
+    /* display: inline-flex; */
+    max-width: 5px;
+    min-height: 1130px;
+    border-left: 1px #c4c5be solid;
+    margin: 40px 0px 100px 0px;
+    padding: 0px;
+}
+
+#reviews-container {
+    max-width: 600px;
+
+}
+
+#reviews-header {
+    color: #636866;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 30px;
+
+}
+
+#review-list {
+    padding: 0;
+}
+
+.single-review {
+    list-style: none;
+    background: rgba(250, 250, 250, .9);
+    margin-bottom: 30px;
+    border-radius: 40px;
+    padding: 20px;
+}
+
+#reviewer-name {
+    color: #636866;
+    margin: 0;
+}
+
+#review-content {
+    color: #636866;
+}
+
+#review-date {
+    color: #636866;
+    font-size: 10px;
+}
+
+#s-album-review-divider {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+#leave-review {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-review {
+    color: #636866;
+}
+
+#newReview {
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+#new-review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#add-review-button {
+    margin-top: 20px;
+    width: 120px;
+}
+
+.edit-input {
+    background-color: rgba(222, 228, 200, 0.9);
+    border-radius: 20px;
+    padding: 5px;
+    width: 400px;
+}
+
+.edit-submit.btn {
+    margin-left: 5px;
+}

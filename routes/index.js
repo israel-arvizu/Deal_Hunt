@@ -71,19 +71,20 @@ router.get('/about', csrfProtection, asyncHandler(async(req, res) => {
     const loggedInUser = await db.User.findByPk(userId)
     console.log(loggedInUser);
     console.log(loggedInUser.firstName)
-  }
-  //   res.render('about', {
-  //     Title: 'About',
-  //     userId,
-  //     loggedInUser,
-  //     csrfToken: req.csrfToken()
-  //   })
-  // }
 
-  res.render('guest-about', {
-    Title: 'About',
-    csrfToken: req.csrfToken()
-  })
+    res.render('about', {
+        Title: 'About',
+        userId,
+        loggedInUser,
+        csrfToken: req.csrfToken()
+      })
+  }else{
+    res.render('guest-about', {
+      Title: 'About',
+      csrfToken: req.csrfToken()
+    })
+  }
+
 }));
 
 router.get('/settings', csrfProtection, asyncHandler(async(req, res, next) => {

@@ -151,10 +151,8 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         const userPass = user.hashedPassword
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
 
-        if (checkedVar) {
-
-          const userId = signinUser(req, res, user);
-          console.log('USER ID', userId);
+        if(checkedVar) {
+          signinUser(req, res, user);
           res.redirect('/');
         }
 
@@ -163,7 +161,8 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         errors.push("No User Found")
       }
 
-    }else{
+    }
+
       errors = validatorErrors.array().map((error) => error.msg);
       res.render('signin', {
         title:"Sign In",
@@ -172,7 +171,6 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
         csrfToken: req.csrfToken()
     })
 
-    }
 
 }))
 

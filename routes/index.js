@@ -70,6 +70,7 @@ router.get('/about', csrfProtection, asyncHandler(async(req, res) => {
     const { userId } = req.session.auth
     const loggedInUser = await db.User.findByPk(userId)
     console.log(loggedInUser);
+    console.log(loggedInUser.firstName)
   }
   //   res.render('about', {
   //     Title: 'About',

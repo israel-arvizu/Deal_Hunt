@@ -2,7 +2,7 @@ const db = require('./db/models');
 
 const signinUser = (req, res, user) => {
     req.session.auth = {userId: user.id};
-    return res.redirect('/');
+    // return res.redirect('/');
 }
 const signoutUser = (req, res) => {
     delete req.session.auth;

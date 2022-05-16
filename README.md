@@ -13,13 +13,14 @@ Discover new albums here: https://musichunt-app.herokuapp.com/
 
 # Images
 
-<img src='../Music_Hunt/public/SS.jpg'>
+![alt text](https://github.com/israel-arvizu/Music_Hunt/blob/main/public/SS.jpg)
 
-<img src='../Music_Hunt/public/ScreenShot2.jpg'>
 
-<img src='../Music_Hunt/public/ScreenShot3.jpg'>
+![alt text](https://github.com/israel-arvizu/Music_Hunt/blob/main/public/ScreenShot2.jpg)
 
-<img src='../Music_Hunt/public/ScreenShot4.jpg'>
+![alt text](https://github.com/israel-arvizu/Music_Hunt/blob/main/public/ScreenShot3.jpg)
+
+
 
 
 

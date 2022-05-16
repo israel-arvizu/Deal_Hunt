@@ -147,16 +147,38 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
       console.log('LOOKING FOR USER')
 
       if (user) {
-        console.log('FOUND USER', user);
         const userPass = user.hashedPassword
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
+        console.log('CREATED PASSWORD')
 
         if(checkedVar) {
+          console.log('PREPRAING TO SING In')
           signinUser(req, res, user);
-          res.redirect('/');
-        }
+          const albums = await db.Album.findAll({
+            order: [['rating', 'DESC']],
+            limit: 10
+            })
+
+          const { userId } = req.session.auth;
+          console.log(userId);
+          const loggedInUser = await db.User.findByPk(userId);
+          const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${userId})`)
+          let songArray = [];
+          const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
+
+          console.log('THIS IS IT---------->', loggedInUser);
+          res.render('home-logged-in',{
+            title: 'Home',
+            albums,
+            userId ,
+            loggedInUser,
+            songs,
+            favListQuery,
+            csrfToken: req.csrfToken()
+        })
 
         errors.push("Failed Login")
+
       }else{
         errors.push("No User Found")
       }
@@ -164,13 +186,14 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
     }
 
       errors = validatorErrors.array().map((error) => error.msg);
-    //   res.render('signin', {
-    //     title:"Sign In",
-    //     email,
-    //     errors,
-    //     csrfToken: req.csrfToken()
-    // })
-    res.send('Login ERORR --------->')
+
+      res.render('signin', {
+        title:"Sign In",
+        email,
+        errors,
+        csrfToken: req.csrfToken()
+    })
+  }
 
 }))
 

@@ -144,38 +144,13 @@ router.post('/signin', csrfProtection, signInValidators, asyncHandler (async(req
       const user = await db.User.findOne({
           where: { email }
       })
-      console.log('LOOKING FOR USER')
 
       if (user) {
         const userPass = user.hashedPassword
         const checkedVar = await bcrypt.compare(hashedPassword, userPass.toString())
-        console.log('CREATED PASSWORD')
 
         if(checkedVar) {
-          console.log('PREPRAING TO SING In')
           signinUser(req, res, user);
-          const albums = await db.Album.findAll({
-            order: [['rating', 'DESC']],
-            limit: 10
-            })
-
-          const { userId } = req.session.auth;
-          console.log(userId);
-          const loggedInUser = await db.User.findByPk(userId);
-          const [favListQuery, metadata] = await sequelize.query(`SELECT * FROM "Albums" INNER JOIN "FavoriteLists" ON "Albums".id = "FavoriteLists"."albumId" INNER JOIN "Users" ON "FavoriteLists"."userId" = "Users".id WHERE ("Albums".id = @"albumId") AND ("Users".id = ${userId})`)
-          let songArray = [];
-          const songs = favListQuery.map((album)  => {songArray.push(album.songList.split('%'))})
-
-          console.log('THIS IS IT---------->', loggedInUser);
-        //   res.render('home-logged-in',{
-        //     title: 'Home',
-        //     albums,
-        //     userId ,
-        //     loggedInUser,
-        //     songs,
-        //     favListQuery,
-        //     csrfToken: req.csrfToken()
-        // })
           res.redirect('/');
         errors.push("Failed Login")
 
@@ -281,7 +256,6 @@ router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
 
   if(userId){
     list.destroy();
-    console.log('Destroyed Album')
     res.json({
       message: 'Destroyed'
     })

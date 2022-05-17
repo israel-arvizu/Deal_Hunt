@@ -11,6 +11,7 @@ body {
    align-items: center;
    justify-content:space-between;
    margin: 20px 60px;
+   margin-right: 30px;
 
 }
 
@@ -52,20 +53,28 @@ body {
     border: none;
 }
 
-.search {
+.search-bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.search-btn {
     height: 30px;
     /* margin-left: 5px; */
     border: none;
     background-color: #6D8B74;
     font-size: 14px;
+    color: white;
 }
 
-.search:hover {
+.search-btn:hover {
     color: #96a899;
+    cursor: pointer;
 }
 
 
-/* PROFILE BUTTON */
+/* PROFILE BUTTON: */
 
 .dropbtn {
     background-color: #f9f3e1;
@@ -73,6 +82,8 @@ body {
     padding: 0px;
     font-size: 18px;
     border: none;
+    margin: 10px;
+    margin-right: 25px;
   }
 
   .dropdown {
@@ -127,4 +138,30 @@ body {
 
 .sign-btn:hover {
     color: #d8b800;
+}
+
+#logo-layout{
+  max-width: 60px;
+
+}
+
+#right_nav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#right-layout-logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#music-hunt-logo{
+  margin: 10px;
+  margin-right: 5px;
+}
+
+#img-logo-right{
+  width: 30px;
+
 }

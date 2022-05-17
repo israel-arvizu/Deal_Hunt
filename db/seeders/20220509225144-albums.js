@@ -9,7 +9,7 @@ module.exports = {
           name: "Call Me If You Get Lost",
           artist: "Tyler, the Creator",
           releaseDate: '2021-06-25',
-          songList: "SIR BAUDELAIRE%CORSO%LEMONDHEAD%WUSYANAME%LUMBERJACK%HOT WIND BLOWS%MASSA%RUNITUP",
+          songList: "SIR BAUDELAIRE%CORSO%LEMONDHEAD%WUSYANAME%LUMBERJACK",
           likeCount: 34,
           rating: 4.7,
           url: "/tyler.jpg",
@@ -21,7 +21,7 @@ module.exports = {
           name: "Planet Her",
           artist: "Doja Cat",
           releaseDate: '2021-06-25',
-          songList: "Women%Naked%Payday%Get Into It%Need to Know%I Dont Do Drugs%Love to Dream%You Right%Been Like This",
+          songList: "Women%Naked%Payday%Get Into It%Need to Know%I Dont Do Drugs",
           likeCount: 27,
           rating: 3.9,
           url: "/doja-cat.jpg",
@@ -33,7 +33,7 @@ module.exports = {
           name: "Donda",
           artist: "Kanye West",
           releaseDate: '2021-09-29',
-          songList: "Donda Chant(Ft.Styleena Johnson)%Jail (Ft.JAY-Z)%God Breathed (Ft. Vory)%Off The Grid%Hurricane (Ft. Lil Baby)",
+          songList: "Donda Chant%Jail%God Breathed%Off The Grid%Hurricane",
           likeCount: 43,
           rating: 3.6,
           url: "/kanye-west.jpg",
@@ -44,7 +44,7 @@ module.exports = {
           name: "Happier Than Ever",
           artist: "Billie Eillish",
           releaseDate: '2021-07-30',
-          songList: "Getting Older%I Didnt Change My Number%Billie Bossa Nova%My Future%Oxytocin%GoldWing%Lost Cause",
+          songList: "Getting Older%Billie Bossa Nova%My Future%Oxytocin%GoldWing%Lost Cause",
           likeCount: 35,
           rating: 4.8,
           url: "/billie-eillish.jpg",
@@ -171,7 +171,57 @@ module.exports = {
           url: "/lana.jpg",
           createdAt: '2020-08-11',
           updatedAt: '2020-08-11'
-        }
+        },
+        {
+          name: "Best Hit AKG",
+          artist: "Asian Kung-Fu Generation",
+          releaseDate: '2012-01-18',
+          songList: "Haruka Kanata%Mirai no Kakera%Understand%Kimi to Iu Hana%Rewrite%Kimi no Machi Made",
+          likeCount: 38,
+          rating: 4.9,
+          url: "/Best_Hit_AKG.jpg",
+          createdAt: '2012-10-18',
+          updatedAt: '2020-10-18'
+
+        },
+        {
+          name: "From Under The Cork Tree",
+          artist: "Fall Out Boy",
+          releaseDate: '2005-05-03',
+          songList: "Our Lawyer Made Us Change the Name of This Song So We Wouldn't Get Sued%Of All the Gin Joints in All the World%Dance, Dance",
+          likeCount: 38,
+          rating: 4.9,
+          url:"/Fallout-Boy.jpg",
+          createdAt: '2020-6-18',
+          updatedAt: '2020-10-18'
+
+        },
+        {
+          name: "Stone Flower",
+          artist: "Antônio Carlos Jobim",
+          releaseDate: '1970-03-03',
+          songList: "Tereza My Love%Children's Games%Choro%Brazil%Stone Flower%Amparo%Andorinha",
+          likeCount: 41,
+          rating: 4.9,
+          url: "/Stone-Flower.jpg",
+          createdAt: '2012-09-18',
+          updatedAt: '2020-09-18'
+
+        },
+        {
+            name: "Songs About Jane",
+            artist: "Maroon 5",
+            releaseDate: '2002-06-25',
+            songList: "Harder to Breathe%This Love%Shiver%She Will Be Loved%Tangled%The Sun",
+            likeCount: 68,
+            rating: 5.0,
+            url: "/Songs-About-Jane.jpg",
+            createdAt: '2012-11-18',
+            updatedAt: '2020-11-18'
+
+          }
+
+
       ], {});
 
   },

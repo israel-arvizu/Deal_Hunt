@@ -1,0 +1,109 @@
+.album-head-row {
+    font-size: 20px;
+    padding: 50px;
+    max-width: fit-content;
+}
+
+/* .album{
+
+    border-radius: 10px;
+    max-width: 200px;
+    max-height: 250px;
+} */
+
+/* img:hover {
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    text-align:center;
+    border: none;
+    border-radius: 38px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-color: #5F7161
+} */
+
+div.album-profile-body {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.albums-ol li::before {
+    /* content: "\2022";
+    color: #6D8B74;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em; */
+
+}
+
+.albums-ol {
+    /* display: table;
+   margin-right: auto;
+   margin-left: auto;
+   max-width: fit-content; */
+   list-style-position: outside;
+}
+
+.album-td {
+    text-align: center;
+    max-height: fit-content;
+    max-width: fit-content;
+    text-overflow: ellipsis;
+
+}
+
+#song-name-albums {
+    display: inline-flex;
+    text-align: start;
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+
+
+.artist {
+    border: 1px black solid;
+}
+
+.btn {
+
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+
+    font-weight: 600;
+    background-color: #6D8B74;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0, 0, 0, 0.17);
+    position: relative;
+    text-align: center;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #6d8b74c5;
+    cursor: pointer;
+}
+
+#albums-table-page {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+#album-Name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#all-albums {
+    color: #636866;
+    margin-left: 40px;
+    font-size: 30px;
+}

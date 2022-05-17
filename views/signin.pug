@@ -4,13 +4,15 @@ block content
     if errors.length > 0
         each err in errors
             p= err
-    form(action="/users/signin" method="post")
-        input(type="hidden" class='token' name="_csrf" value=csrfToken)
-        label(for="email") Email
-        input(type="text" name="email" required )
-        label(for="hashedPassword") Password
-        input(type="text" name="hashedPassword" required)
-        button(type='submit') Sign In
-
-    form(action="/users/demo", method="post")
-            button.demo-button Demo
+    div(class='settings-body-page')
+        div(class='settings-container')
+            h2(class='settings-header') Sign In
+            form(action="/users/signin" method="post" class='settings-form')
+                input(type="hidden" class='token' name="_csrf" value=csrfToken)
+                label(for="email" class='settings-name-blocks') Email:
+                    input(type="text" class='settings-form-blocks' name="email" required )
+                label(for="hashedPassword" class='settings-name-blocks') Password:
+                    input(type="password" class='settings-form-blocks' name="hashedPassword" required)
+                button(type='submit' class='settings-save btn') Sign In
+            form(action="/users/demo", method="post" id='demo-button-container')
+                button.demo-button(class='settings-save-long btn') Demo

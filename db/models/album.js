@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      allowNull: false,
     },
     songList: {
-     type: DataTypes.STRING(255),
+     type: DataTypes.STRING(1055),
      allowNull: false,
     },
     likeCount: {

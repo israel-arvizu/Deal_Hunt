@@ -4,8 +4,16 @@ html
       block head
         title= title
         link(rel='stylesheet' href='/stylesheets/index.css')
+        link(rel='stylesheet' href='/stylesheets/socials-page.css')
+        link(rel='stylesheet' href='/stylesheets/settings-form.css')
+        link(rel='stylesheet' href='/stylesheets/profile-page.css')
+        link(rel='stylesheet' href='/stylesheets/search-styling.css')
+        link(rel='stylesheet' href='/stylesheets/about-page.css')
+        link(rel='stylesheet' href='/stylesheets/album-page.css')
         link(rel='stylesheet' href='/stylesheets/layout.css')
         link(rel='stylesheet' href='/stylesheets/home.css')
+        link(rel='icon' href='/Music_hunt_logo.ico')
+        link(rel='stylesheet' href='/stylesheets/single-album.css')
         link(rel="preconnect" href="https://fonts.googleapis.com")
         link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
         link(href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,500&family=PT+Sans&family=Varela+Round&display=swap" rel="stylesheet")
@@ -15,25 +23,38 @@ html
   body
     div(class="nav-bar")
         div(id='left_nav')
-            img(src='/favicon.ico' id='logo')
+            a(href='/')
+                img(src='/Favicon Music_hunt.png' id='logo-layout')
             div(class="search-bar")
                 form(id="searchbar" action='/search/results' method="post")
                     input(type="search" id="query" name="SearchName" placeholder="Search albums...")
                     input(type="hidden" class='token' name="_csrf" value=csrfToken)
-                    button(class="search btn") Search
+                    button(class="search-btn") Search
             div(class="nav-buttons")
                 a(href='/' class='nav') Home
                 a(href='/albums' class='nav') Albums
                 a(href='/about' class='nav') About
         div(id='right_nav')
             div(class='dropdown')
-                button(class='dropbtn') #{loggedInUser.firstName}
+                button(class='dropbtn') #{loggedInUser.firstName} #{loggedInUser.lastName}
                 div(class='dropdown-content')
                     a(href=`/users/${userId}`) Profile
                     a(href='/settings') Settings
                     a(href='/users/signout') Sign Out
+            div(id='right-layout-logo')
+                h2(id='music-hunt-logo') Music Hunt
+                img(src='/Favicon Music_hunt.png' id='img-logo-right')
     div(id='header-border')
 
 
 
+
     block content
+    footer
+      div
+
+        hr(class='footer-hr')
+        div(class='wrap')
+            div(class='socials')
+
+                a(href='/users/socials' class='footer-logo') Three Musketeers Co. ©

@@ -85,7 +85,6 @@ router.post('/signup', csrfProtection, signUpValidator, asyncHandler(async(req, 
         hashedPassword
     } = req.body
     const hashPass = await generatePass(hashedPassword)
-    // console.log(hashPass)
 
     const user = db.User.build({
         firstName,
@@ -241,7 +240,6 @@ router.put('/favorite-list/:id(\\d+)', asyncHandler(async(req, res) => {
 }))
 
 router.put('/favorite-list/remove/:id(\\d+)', asyncHandler(async(req, res) => {
-  console.log('Entered Route')
   const {userId} = req.session.auth;
   const albumId = req.params.id;
   const list = await db.FavoriteList.findOne({where: {
@@ -273,12 +271,30 @@ router.post(
         email: 'karmaissniping@dmxs8.com'
       }
     });
-    console.log(user)
+
     signinUser(req, res, user);
-    console.log(req.session.auth)
     res.redirect('/')
   })
 );
+
+router.get('/socials', csrfProtection, asyncHandler(async(req,res) => {
+  if (req.session.auth) {
+    const {userId} = req.session.auth;
+    res.render('socials', {
+      title: 'Socials',
+      userId,
+      csrfToken: req.csrfToken()
+    })
+
+  } else {
+
+    res.render('guest-socials', {
+      title: 'Guest-Socials',
+
+      csrfToken: req.csrfToken()
+    })
+  }
+}))
 
 
 module.exports = router;

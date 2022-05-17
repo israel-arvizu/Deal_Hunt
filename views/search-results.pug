@@ -1,7 +1,15 @@
 extends layout.pug
 block content
-    h1 Results
-    div(name='Results List')
-        ul
-            each result in searchFilters
-                li #{result.name}, #{result.artist}
+    div(id='top-banner-head')
+        h1(id='results-top') Results
+    div(name='Results List' class="result-list")
+        //- hr(class='result-break')
+        ul(class="result-individual-section")
+            each album in searchFilters
+                div
+                    li(class="list-item")
+                        a(href=`/albums/${album.id}` class='home-album-link')
+                            div(class=`result-container-${album.id}` id='results-container')
+                                img(src= album.url class="image-search-result")
+                                h3(class='album-title-search' id="title-album") #{album.name}
+                                p(class='album-artist-search') #{album.artist}

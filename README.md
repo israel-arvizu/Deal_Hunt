@@ -10,6 +10,9 @@ Discover new albums here: https://musichunt-app.herokuapp.com/
 - Express
 - Front-End Vanilla JS
 - Sequelize
+- HTML
+- CSS
+- PUG
 
 # Images
 
